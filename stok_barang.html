@@ -8,6 +8,10 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <link rel="manifest" href="manifest.json" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
@@ -1740,6 +1744,17 @@
         let lowStock = 0;
         let outOfStock = 0;
 
+        // Guard: pastikan filteredData ada dan bukan kosong
+        if (!filteredData || filteredData.length === 0) {
+          console.warn("[updateDashboard] filteredData kosong, skip update");
+          // Set default values
+          document.getElementById("totalItems").textContent = "0";
+          document.getElementById("totalStock").textContent = "0";
+          document.getElementById("lowStock").textContent = "0";
+          document.getElementById("outOfStock").textContent = "0";
+          return;
+        }
+
         filteredData.forEach((row) => {
           // Assuming sisa stok is in column 9 (index 8)
           const sisaStok = parseInt(row[8]) || 0;
@@ -1757,10 +1772,23 @@
           }
         });
 
-        document.getElementById("totalItems").textContent = totalItems.size;
-        document.getElementById("totalStock").textContent = totalStock;
-        document.getElementById("lowStock").textContent = lowStock;
-        document.getElementById("outOfStock").textContent = outOfStock;
+        // Update dengan error handling
+        const totalItemsEl = document.getElementById("totalItems");
+        const totalStockEl = document.getElementById("totalStock");
+        const lowStockEl = document.getElementById("lowStock");
+        const outOfStockEl = document.getElementById("outOfStock");
+
+        if (totalItemsEl) totalItemsEl.textContent = totalItems.size;
+        if (totalStockEl) totalStockEl.textContent = totalStock;
+        if (lowStockEl) lowStockEl.textContent = lowStock;
+        if (outOfStockEl) outOfStockEl.textContent = outOfStock;
+
+        console.log("[updateDashboard] Updated:", {
+          totalItems: totalItems.size,
+          totalStock,
+          lowStock,
+          outOfStock,
+        });
       }
 
       // Update Table and Cards
