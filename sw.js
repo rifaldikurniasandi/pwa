@@ -1,4 +1,7 @@
 const CACHE_NAME = "sistem-pabrik-v1.2";
+// Only cache local app assets. Avoid caching external CDNs which can
+// fail on some mobile networks and cause the service worker install
+// to fail (manifested as ERR_CONNECTION_RESET on some devices).
 const urlsToCache = [
   "./",
   "index.html",
@@ -24,16 +27,27 @@ const urlsToCache = [
   "pengemasan.webp",
   "penyimpanan.webp",
   "perakitan.webp",
-  "https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css",
-  "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
-  "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
 ];
 
 self.addEventListener("install", function (event) {
+  // Use a tolerant install: try to cache local resources, but don't
+  // fail the install if some items fail to fetch (e.g. network reset).
   event.waitUntil(
-    caches.open(CACHE_NAME).then(function (cache) {
-      return cache.addAll(urlsToCache);
-    })
+    (async function () {
+      const cache = await caches.open(CACHE_NAME);
+      // Use Promise.allSettled so one failing request doesn't fail the whole install
+      const results = await Promise.allSettled(
+        urlsToCache.map((url) => cache.add(url))
+      );
+
+      // Optionally log failures for debugging
+      results.forEach((r, i) => {
+        if (r.status === "rejected") {
+          console.warn("SW: cache failed for", urlsToCache[i], r.reason);
+        }
+      });
+      return;
+    })()
   );
 });
 
