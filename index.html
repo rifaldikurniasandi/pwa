@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PT. Nasional Farindo Jaya</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="manifest" href="manifest.json" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+      :root {
+        --primary: #3b82f6;
+        --primary-dark: #1e40af;
+        --secondary: #4e6dd4;
+        --accent: #15aec9;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        min-height: 100vh;
+      }
+
+      .glass {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+      }
+
+      .glass-dark {
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .glass-dark-card {
+        background: rgba(30, 41, 59, 0.8);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 50%,
+          var(--accent) 100%
+        );
+      }
+
+      .gradient-text {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 50%,
+          var(--accent) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-bg {
+        background: linear-gradient(
+          135deg,
+          rgba(20, 56, 177, 0.9) 0%,
+          rgba(151, 117, 232, 0.8) 100%
+        );
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+
+      .card-hover {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-origin: center;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+
+      .floating {
+        animation: floating 6s ease-in-out infinite;
+      }
+
+      @keyframes floating {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(1deg);
+        }
+      }
+
+      .pulse-slow {
+        animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+      }
+
+      .slide-in {
+        animation: slideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .stagger > * {
+        opacity: 0;
+        animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      .stagger > *:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .stagger > *:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .stagger > *:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .stagger > *:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .stagger > *:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+
+      .blob {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.1;
+        z-index: -1;
+        animation: blobMove 20s infinite alternate;
+      }
+
+      @keyframes blobMove {
+        0% {
+          transform: translate(0px, 0px) scale(1);
+        }
+        50% {
+          transform: translate(100px, -50px) scale(1.1);
+        }
+        100% {
+          transform: translate(-50px, 100px) scale(0.9);
+        }
+      }
+
+      .nav-blur {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      /* Defensive: ensure navbar always visible on mobile
+         Some mobile browsers / styles may hide or overlay the nav -
+         force it above other content and reset opacity so it shows
+         on first paint (no scroll needed). */
+      @media (max-width: 767px) {
+        .nav-blur {
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          z-index: 99999 !important;
+          opacity: 1 !important;
+          -webkit-backdrop-filter: blur(12px) !important;
+          backdrop-filter: blur(12px) !important;
+          background: rgba(255, 255, 255, 0.96) !important;
+        }
+
+        /* Ensure nav links / logo are visible immediately */
+        .nav-link,
+        .mobile-logo,
+        #mobile-menu-button {
+          opacity: 1 !important;
+          display: inline-flex !important;
+        }
+
+        /* Defensive: make sure the mobile menu panel is offscreen until toggled */
+        #mobile-menu {
+          display: none !important;
+        }
+      }
+
+      .gradient-border {
+        position: relative;
+        background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        padding: 2px;
+        border-radius: 20px;
+      }
+
+      .gradient-border::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        padding: 2px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: xor;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+      }
+
+      #backToTop {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 99;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--primary);
+        color: white;
+        border: none;
+        cursor: pointer;
+        display: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+      }
+
+      #backToTop:hover {
+        background: var(--primary-dark);
+        transform: translateY(-3px);
+      }
+
+      #pwaInstallPopup {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 100;
+        max-width: 300px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        padding: 15px;
+        display: none;
+        animation: slideInUp 0.5s ease;
+      }
+
+      @keyframes slideInUp {
+        from {
+          transform: translateY(100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .pwa-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .nav-link {
+        position: relative;
+        transition: all 0.3s ease;
+        padding: 8px 0;
+      }
+
+      .nav-link.active {
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .nav-link.active::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--primary);
+      }
+
+      .typewriter-container {
+        display: inline-block;
+        overflow: hidden;
+      }
+
+      .typewriter {
+        overflow: hidden;
+        border-right: 3px solid white;
+        white-space: nowrap;
+        margin: 0 auto;
+        animation: typing 3s steps(40, end) forwards,
+          blink-caret 0.75s step-end infinite,
+          delete-text 3s steps(40, end) 3s forwards,
+          final-blink 0.75s step-end 6s infinite;
+        width: 0;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes delete-text {
+        from {
+          width: 100%;
+        }
+        to {
+          width: 0;
+        }
+      }
+
+      @keyframes blink-caret {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: white;
+        }
+      }
+
+      @keyframes final-blink {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: white;
+        }
+      }
+
+      .bounce-slow {
+        animation: bounce-slow 3s ease-in-out infinite;
+        margin: 10px 0;
+        border-radius: 24px;
+        position: relative;
+        display: inline-block;
+      }
+
+      @keyframes bounce-slow {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-8px);
+        }
+        60% {
+          transform: translateY(-4px);
+        }
+      }
+      .slide-in-left {
+        opacity: 0;
+        transform: translateX(-100px);
+        animation: slideInLeft 2s ease-in 2s forwards;
+      }
+
+      .slide-in-right {
+        opacity: 0;
+        transform: translateX(100px);
+        animation: slideInRight 2s ease-in 2s forwards;
+      }
+
+      @keyframes slideInLeft {
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      /* GALLERY IMAGE FILL */
+      .gallery-image-fill {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .gallery-image-container {
+        height: 200px;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+      .gallery-zoom {
+        transition: transform 0.5s ease !important;
+        will-change: transform;
+      }
+
+      .gallery-zoom:hover {
+        transform: scale(1.1) !important;
+      }
+
+      .social-hover {
+        transition: all 0.3s ease !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+
+      .social-hover:hover {
+        transform: translateY(-5px) scale(1.1) !important;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3) !important;
+      }
+
+      .card-hover-lift {
+        transition: all 0.3s ease !important;
+      }
+
+      .card-hover-lift:hover {
+        transform: translateY(-8px) scale(1.05) !important;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2) !important;
+      }
+
+      .btn-mobile {
+        min-width: 200px;
+        padding: 14px 28px;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 10px 0;
+        border-radius: 24px;
+      }
+
+      @media (max-width: 640px) {
+        .btn-mobile {
+          min-width: 180px;
+          padding: 12px 24px;
+          font-size: 14px;
+        }
+
+        .typewriter {
+          font-size: 2rem !important;
+          white-space: normal !important;
+          border-right: none !important;
+          animation: none !important;
+          width: 100% !important;
+        }
+      }
+
+      .white-bg {
+        background: white;
+      }
+
+      .animate-on-load {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .footer-border {
+        border-top: 1px solid #e5e7eb;
+      }
+
+      @media (max-width: 768px) {
+        .hero-bg {
+          background-attachment: scroll;
+        }
+
+        #pwaInstallPopup {
+          left: 10px;
+          right: 10px;
+          max-width: none;
+        }
+
+        .section-title {
+          line-height: 1.2 !important;
+          padding-top: 0.5rem;
+          padding-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+          line-height: 1.4 !important;
+        }
+      }
+
+      .section-title {
+        line-height: 1.1;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+      }
+
+      .section-subtitle {
+        line-height: 1.5;
+      }
+
+      .card-hover-improved {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform-origin: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card-hover-improved::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.7s;
+      }
+
+      .card-hover-improved:hover::before {
+        left: 100%;
+      }
+
+      .card-hover-improved:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .pulse-icon {
+        animation: pulse-icon 2s infinite;
+      }
+
+      @keyframes pulse-icon {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .stagger-fix > * {
+        opacity: 0;
+        animation: slideIn 0.6s ease forwards;
+      }
+
+      .stagger-fix > *:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .stagger-fix > *:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .stagger-fix > *:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .stagger-fix > *:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .stagger-fix > *:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 3px;
+        background: linear-gradient(90deg, #3b82f6, #4e6dd4);
+        z-index: 9998;
+        transition: width 0.3s ease;
+      }
+
+      .gallery-text-fix {
+        min-height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+      }
+
+      .gallery-text-fix h3 {
+        font-size: 1.125rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+        color: #1e293b;
+      }
+
+      .gallery-text-fix p {
+        overflow: hidden;
+        line-height: 1.5;
+        color: #64748b;
+        font-size: 0.875rem;
+        margin: 0;
+        max-height: 4.5em; /* alternatif untuk membatasi tinggi */
+      }
+
+      .dark-card {
+        background: linear-gradient(
+          135deg,
+          rgba(30, 41, 59, 0.9) 0%,
+          rgba(15, 23, 42, 0.9) 100%
+        );
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .dark-card .gradient-text {
+        background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .dark-card p {
+        color: #e2e8f0;
+      }
+
+      .gallery-card-consistent {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .gallery-image-container {
+        height: 200px;
+        flex-shrink: 0;
+      }
+
+      .btn-bounce-container {
+        display: inline-block;
+        border-radius: 24px;
+        overflow: hidden;
+      }
+
+      /* STOCK TABLE STYLES */
+      .stock-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .stock-table th {
+        background: rgba(59, 130, 246, 0.1);
+        padding: 12px 16px;
+        text-align: left;
+        font-weight: 600;
+        color: #1e293b;
+        border-bottom: 2px solid #e2e8f0;
+      }
+
+      .stock-table td {
+        padding: 12px 16px;
+        border-bottom: 1px solid #e2e8f0;
+        color: #475569;
+      }
+
+      .stock-table tr:hover {
+        background: rgba(59, 130, 246, 0.05);
+      }
+
+      .stock-low {
+        color: #dc2626;
+        font-weight: 600;
+      }
+
+      .stock-medium {
+        color: #d97706;
+        font-weight: 600;
+      }
+
+      .stock-good {
+        color: #059669;
+        font-weight: 600;
+      }
+
+      .stock-loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+        color: #64748b;
+      }
+
+      @media (max-width: 768px) {
+        .gallery-text-fix {
+          min-height: 90px;
+          padding: 0.75rem 1rem;
+        }
+
+        .gallery-text-fix h3 {
+          font-size: 1rem;
+          margin-bottom: 0.25rem;
+        }
+
+        .gallery-text-fix p {
+          font-size: 0.8rem;
+          max-height: 3em; /* alternatif untuk 2 baris */
+          overflow: hidden;
+        }
+
+        .gallery-image-container {
+          height: 160px;
+        }
+
+        .btn-bounce-container {
+          width: 100%;
+          max-width: 280px;
+        }
+
+        /* Responsive stock table */
+        .stock-table-container {
+          overflow-x: auto;
+        }
+
+        .stock-table {
+          min-width: 600px;
+        }
+
+        .stock-table th,
+        .stock-table td {
+          padding: 8px 12px;
+          font-size: 0.875rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .gallery-card-consistent {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Scroll Progress Bar -->
+    <div id="scrollProgress" class="scroll-progress"></div>
+
+    <!-- Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div class="blob top-0 -left-40"></div>
+      <div class="blob bottom-0 -right-40"></div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- PWA Install Popup -->
+    <div id="pwaInstallPopup" class="glass flex items-center">
+      <div class="pwa-logo">NFJ</div>
+      <div class="flex-1">
+        <p class="text-sm font-medium text-slate-800">Install Aplikasi NFJ</p>
+        <p class="text-xs text-slate-600">Akses lebih cepat dan mudah</p>
+      </div>
+      <button id="installButton" class="ml-2 text-blue-600 font-medium text-sm">
+        Install
+      </button>
+      <button id="closeInstallPopup" class="ml-2 text-slate-500">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-blur fixed top-0 w-full z-50">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="flex items-center justify-between py-4">
+          <div class="flex items-center space-x-4">
+            <div
+              class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl gradient-bg flex items-center justify-center shadow-lg"
+            >
+              <span class="text-white font-bold text-lg">NFJ</span>
+            </div>
+            <div class="hidden md:block">
+              <div class="text-lg font-bold text-slate-800">
+                PT. Nasional Farindo Jaya
+              </div>
+              <div class="text-sm text-slate-600">Divisi Assembling</div>
+            </div>
+          </div>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex items-center space-x-8">
+            <a
+              href="index.html"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative"
+              id="nav-home"
+            >
+              Beranda
+            </a>
+            <a
+              href="form.html"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative"
+              id="nav-form"
+            >
+              Form
+            </a>
+            <a
+              href="bank_data.html"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative"
+              id="nav-bank-data"
+            >
+              Bank Data
+            </a>
+            <a
+              href="#galeri"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative"
+              id="nav-galeri"
+            >
+              Galeri
+            </a>
+            <a
+              href="#kontak"
+              class="bg-blue-600 text-white px-4 py-2 sm:px-6 sm:py-2 rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl text-sm sm:text-base"
+              id="nav-kontak"
+            >
+              Kontak
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <button
+            id="mobile-menu-button"
+            class="md:hidden text-slate-700 text-xl"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div
+          id="mobile-menu"
+          class="hidden md:hidden pb-6 border-t border-slate-200 pt-4"
+        >
+          <div class="flex flex-col space-y-4 text-center">
+            <a
+              href="index.html"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+              id="nav-home-mobile"
+              >Beranda</a
+            >
+            <a
+              href="form.html"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+              id="nav-form-mobile"
+              >Form</a
+            >
+            <a
+              href="bank_data.html"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+              id="nav-bank-data-mobile"
+              >Bank Data</a
+            >
+            <a
+              href="#galeri"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+              id="nav-galeri-mobile"
+              >Galeri</a
+            >
+            <a
+              href="#kontak"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+              id="nav-kontak-mobile"
+              >Kontak</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden pt-16"
+    >
+      <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+        <div class="max-w-4xl mx-auto stagger-fix">
+          <!-- Typewriter Effect -->
+          <div class="typewriter-container mb-8">
+            <h1
+              class="text-3xl sm:text-5xl md:text-7xl font-black mb-6 sm:mb-9 text-white leading-tight section-title typewriter"
+              id="typewriterText"
+            >
+              PT. Nasional Farindo Jaya
+            </h1>
+          </div>
+
+          <p
+            class="text-lg sm:text-xl md:text-2xl text-blue-100 mb-8 sm:mb-12 leading-relaxed max-w-3xl mx-auto section-subtitle animate-on-load"
+          >
+            Membentuk masa depan industri manufaktur Indonesia dengan inovasi,
+            kualitas, dan komitmen yang tak tergoyahkan.
+          </p>
+
+          <div
+            class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center stagger-fix"
+          >
+            <!-- PERBAIKAN: Button dengan bounce effect yang fixed -->
+            <a href="#lokasi" class="btn-bounce-container">
+              <div
+                class="gradient-bg bounce-slow text-white font-semibold rounded-2xl hover:shadow-xl transition-all duration-300 btn-mobile text-center px-8 py-4 shadow-lg"
+                style="box-shadow: 0 3px 5px rgba(132, 135, 140, 0.4)"
+              >
+                <span class="relative z-10">Jelajahi Perusahaan</span>
+              </div>
+            </a>
+
+            <a href="#kontak" class="group">
+              <div
+                class="glass text-white hover:bg-red-500 hover:shadow-xl font-semibold rounded-2xl hover:bg-white/20 transition-all duration-300 btn-mobile text-center px-8 py-4"
+              >
+                Hubungi Kami
+                <i
+                  class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"
+                ></i>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision & Mission Section -->
+    <section
+      id="tentang"
+      class="py-16 sm:py-20 relative bg-gradient-to-br from-slate-50 to-blue-50"
+    >
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12 sm:mb-16 stagger-fix">
+          <h2
+            class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 gradient-text section-title animate-on-load"
+          >
+            Visi & Misi Perusahaan
+          </h2>
+          <p
+            class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto section-subtitle animate-on-load"
+          >
+            Fondasi yang membangun setiap langkah kemajuan perusahaan
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto"
+        >
+          <!-- Vision dengan animasi slide dari kiri -->
+          <div
+            class="bg-gradient-to-b from-blue-200 to-purple-200 rounded-3xl p-6 sm:p-8 card-hover-improved slide-in-left"
+          >
+            <div class="flex items-center mb-4 sm:mb-6">
+              <div
+                class="w-10 h-10 sm:w-12 sm:h-12 gradient-bg rounded-xl flex items-center justify-center mr-3 sm:mr-4 pulse-icon"
+              >
+                <i class="fas fa-eye text-white text-base sm:text-lg"></i>
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-black gradient-text">
+                Visi
+              </h3>
+            </div>
+            <div class="text-center">
+              <div
+                class="text-4xl sm:text-5xl font-black text-slate-400 mb-3 sm:mb-4"
+              >
+                "
+              </div>
+              <p
+                class="text-lg sm:text-xl text-slate-200 leading-relaxed italic"
+              >
+                Menjadi perusahaan manufaktur terdepan yang menginspirasi
+                kehidupan keluarga Indonesia melalui produk-produk inovatif dan
+                berkualitas tinggi.
+              </p>
+            </div>
+          </div>
+
+          <!-- Mission dengan animasi slide dari kanan -->
+          <div
+            class="dark-card rounded-3xl p-6 sm:p-8 card-hover-improved slide-in-right"
+          >
+            <div class="flex items-center mb-4 sm:mb-6">
+              <div
+                class="w-10 h-10 sm:w-12 sm:h-12 gradient-bg rounded-xl flex items-center justify-center mr-3 sm:mr-4 pulse-icon"
+              >
+                <i class="fas fa-bullseye text-white text-base sm:text-lg"></i>
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-black gradient-text">
+                Misi
+              </h3>
+            </div>
+            <div class="space-y-3 sm:space-y-4">
+              <div class="flex items-start">
+                <div
+                  class="w-5 h-5 sm:w-6 sm:h-6 gradient-bg rounded-full flex items-center justify-center mt-1 mr-3 sm:mr-4 flex-shrink-0"
+                >
+                  <i class="fas fa-check text-white text-xs"></i>
+                </div>
+                <p class="text-slate-200 text-sm sm:text-base">
+                  Mengembangkan produk rumah tangga yang fungsional, estetis,
+                  dan ramah lingkungan
+                </p>
+              </div>
+              <div class="flex items-start">
+                <div
+                  class="w-5 h-5 sm:w-6 sm:h-6 gradient-bg rounded-full flex items-center justify-center mt-1 mr-3 sm:mr-4 flex-shrink-0"
+                >
+                  <i class="fas fa-check text-white text-xs"></i>
+                </div>
+                <p class="text-slate-200 text-sm sm:text-base">
+                  Menerapkan standar kualitas tertinggi dalam setiap proses
+                  produksi
+                </p>
+              </div>
+              <div class="flex items-start">
+                <div
+                  class="w-5 h-5 sm:w-6 sm:h-6 gradient-bg rounded-full flex items-center justify-center mt-1 mr-3 sm:mr-4 flex-shrink-0"
+                >
+                  <i class="fas fa-check text-white text-xs"></i>
+                </div>
+                <p class="text-slate-200 text-sm sm:text-base">
+                  Memberikan nilai tambah bagi pelanggan, karyawan, dan
+                  masyarakat
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section
+      class="py-16 sm:py-20 relative bg-gradient-to-br from-slate-50 to-blue-50"
+    >
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12 sm:mb-16 stagger-fix">
+          <h2
+            class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 gradient-text section-title animate-on-load"
+          >
+            Keunggulan Perusahaan
+          </h2>
+          <p
+            class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto section-subtitle animate-on-load"
+          >
+            Komitmen kami terhadap kualitas dan inovasi menjadikan NFJ pilihan
+            terpercaya dalam industri manufaktur
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 stagger-fix">
+          <div
+            class="glass rounded-3xl p-6 sm:p-8 card-hover-lift text-center animate-on-load"
+          >
+            <div
+              class="w-16 h-16 sm:w-20 sm:h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg pulse-icon"
+            >
+              <i class="fas fa-users text-xl sm:text-2xl text-white"></i>
+            </div>
+            <h3
+              class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-slate-800"
+            >
+              100+ Tim Profesional
+            </h3>
+            <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+              Didukung oleh tim ahli yang berpengalaman dan berdedikasi dalam
+              setiap aspek produksi
+            </p>
+          </div>
+
+          <div
+            class="glass rounded-3xl p-6 sm:p-8 card-hover-lift text-center animate-on-load"
+          >
+            <div
+              class="w-16 h-16 sm:w-20 sm:h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg pulse-icon"
+            >
+              <i class="fas fa-industry text-xl sm:text-2xl text-white"></i>
+            </div>
+            <h3
+              class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-slate-800"
+            >
+              Fasilitas Modern
+            </h3>
+            <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+              Area produksi seluas 1 hektar dengan teknologi terkini untuk hasil
+              yang optimal
+            </p>
+          </div>
+
+          <div
+            class="glass rounded-3xl p-6 sm:p-8 card-hover-lift text-center animate-on-load"
+          >
+            <div
+              class="w-16 h-16 sm:w-20 sm:h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg pulse-icon"
+            >
+              <i class="fas fa-globe-asia text-xl sm:text-2xl text-white"></i>
+            </div>
+            <h3
+              class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-slate-800"
+            >
+              Jangkauan Global
+            </h3>
+            <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+              Produk kami telah sampai ke berbagai negara dengan kualitas yang
+              diakui internasional
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section
+      id="galeri"
+      class="py-16 sm:py-20 bg-gradient-to-br from-slate-50 to-blue-50 relative"
+    >
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12 sm:mb-16 stagger-fix">
+          <h2
+            class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 gradient-text section-title animate-on-load"
+          >
+            Galeri Produksi
+          </h2>
+
+          <p
+            class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto section-subtitle animate-on-load"
+          >
+            Jelajahi fasilitas dan proses produksi kami yang modern dan
+            terstandarisasi
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-6xl mx-auto stagger-fix"
+        >
+          <!-- Gallery Items dengan efek zoom dan text fix -->
+          <div
+            class="gradient-border rounded-3xl overflow-hidden card-hover-improved animate-on-load gallery-card-consistent"
+          >
+            <div
+              class="gallery-image-container bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center overflow-hidden"
+            >
+              <img
+                src="perakitan.webp"
+                alt="Area Produksi Utama"
+                class="gallery-image-fill gallery-zoom"
+              />
+            </div>
+            <div class="gallery-text-fix bg-white">
+              <h3>Area Produksi Utama</h3>
+              <p>
+                Fasilitas produksi dengan mesin-mesin modern untuk hasil yang
+                optimal...
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="gradient-border rounded-3xl overflow-hidden card-hover-improved animate-on-load gallery-card-consistent"
+          >
+            <div
+              class="gallery-image-container bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center overflow-hidden"
+            >
+              <img
+                src="pengecekan.webp"
+                alt="Quality Control"
+                class="gallery-image-fill gallery-zoom"
+              />
+            </div>
+            <div class="gallery-text-fix bg-white">
+              <h3>Quality Control</h3>
+              <p class="text-slate-600 text-sm sm:text-base">
+                Tim QC yang ketat memastikan standar kualitas tertinggi dengan
+                pemeriksaan menyeluruh di setiap tahap
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="gradient-border rounded-3xl overflow-hidden card-hover-improved animate-on-load gallery-card-consistent"
+          >
+            <div
+              class="gallery-image-container bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center overflow-hidden"
+            >
+              <img
+                src="penyimpanan.webp"
+                alt="Gudang Penyimpanan"
+                class="gallery-image-fill gallery-zoom"
+              />
+            </div>
+            <div class="gallery-text-fix bg-white">
+              <h3>Gudang Penyimpanan</h3>
+              <p class="text-slate-600 text-sm sm:text-base">
+                Sistem penyimpanan terorganisir untuk efisiensi maksimal dengan
+                pengelolaan inventory yang modern
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="gradient-border rounded-3xl overflow-hidden card-hover-improved animate-on-load gallery-card-consistent"
+          >
+            <div
+              class="gallery-image-container bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center overflow-hidden"
+            >
+              <img
+                src="pengemasan.webp"
+                alt="Perakitan"
+                class="gallery-image-fill gallery-zoom"
+              />
+            </div>
+            <div class="gallery-text-fix bg-white">
+              <h3>Perakitan</h3>
+              <p class="text-slate-600 text-sm sm:text-base">
+                Teknologi perakitan modern dengan presisi tinggi untuk kualitas
+                terbaik dan konsistensi produk
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stock Section - DITAMBAHKAN -->
+    <section
+      id="stok"
+      class="py-16 sm:py-20 bg-gradient-to-br from-slate-50 to-blue-50 relative"
+    >
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12 sm:mb-16 stagger-fix">
+          <h2
+            class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 gradient-text section-title animate-on-load"
+          >
+            Monitoring Real-time
+          </h2>
+          <p
+            class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto section-subtitle animate-on-load"
+          >
+            Pantau pergerakan stok barang di divisi assembling dengan sistem
+            terintegrasi yang akurat
+          </p>
+        </div>
+
+        <div class="max-w-6xl mx-auto">
+          <div
+            class="glass rounded-3xl overflow-hidden shadow-2xl card-hover-improved"
+          >
+            <div class="gradient-bg px-4 sm:px-8 py-4 sm:py-6">
+              <h3 class="text-xl sm:text-2xl font-bold text-white">
+                Stok Barang Terkini
+              </h3>
+            </div>
+            <div class="stock-table-container">
+              <table class="stock-table">
+                <thead>
+                  <tr>
+                    <th>Barang</th>
+                    <th>Warna</th>
+                    <th>Ukuran</th>
+                    <th>Tipe</th>
+                    <th>Sisa Stok</th>
+                  </tr>
+                </thead>
+                <tbody id="previewTableBody">
+                  <tr>
+                    <td colspan="5" class="stock-loading">
+                      <div class="flex items-center">
+                        <div
+                          class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mr-3"
+                        ></div>
+                        Memuat data stok...
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="border-t border-slate-200 p-4 sm:p-6 text-center">
+              <a
+                href="stok_barang.html"
+                class="inline-flex items-center gradient-bg text-white px-6 py-2 sm:px-8 sm:py-3 rounded-xl font-semibold hover:shadow-lg transition-all text-sm sm:text-base"
+              >
+                Lihat Detail Lengkap
+                <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Section -->
+    <section
+      id="lokasi"
+      class="py-16 sm:py-20 relative bg-gradient-to-br from-slate-50 to-blue-50"
+    >
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12 sm:mb-16 stagger-fix">
+          <h2
+            class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 gradient-text section-title animate-on-load"
+          >
+            Lokasi Perusahaan
+          </h2>
+          <p
+            class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto section-subtitle animate-on-load"
+          >
+            Temukan kami di lokasi strategis dengan akses yang mudah
+          </p>
+        </div>
+
+        <div class="max-w-6xl mx-auto">
+          <div
+            class="glass rounded-3xl overflow-hidden shadow-2xl card-hover-improved"
+          >
+            <div class="gradient-bg px-4 sm:px-8 py-4 sm:py-6">
+              <h3 class="text-xl sm:text-2xl font-bold text-white">
+                PT. Nasional Farindo Jaya
+              </h3>
+            </div>
+            <div class="p-4 sm:p-8">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+                <div>
+                  <h4
+                    class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-slate-800"
+                  >
+                    Informasi Lokasi
+                  </h4>
+                  <div class="space-y-2 sm:space-y-3 text-slate-600">
+                    <div class="flex items-center">
+                      <i
+                        class="fas fa-map-marker-alt text-blue-500 mr-2 sm:mr-3"
+                      ></i>
+                      <span class="text-sm sm:text-base"
+                        >Jl. Kyai Tambak Deres No.289-291, Bulak, Kec. Bulak,
+                        Surabaya, Jawa Timur 60124</span
+                      >
+                    </div>
+                    <div class="flex items-center">
+                      <i class="fas fa-phone text-blue-500 mr-2 sm:mr-3"></i>
+                      <span class="text-sm sm:text-base">+628563161071</span>
+                    </div>
+                    <div class="flex items-center">
+                      <i class="fas fa-envelope text-blue-500 mr-2 sm:mr-3"></i>
+                      <span class="text-sm sm:text-base"
+                        >info@nasionalfarindojaya.com</span
+                      >
+                    </div>
+                    <div class="flex items-center">
+                      <i class="fas fa-clock text-blue-500 mr-2 sm:mr-3"></i>
+                      <span class="text-sm sm:text-base"
+                        >Senin - Sabtu: 08:00 - 17:00</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-lg">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.123456789012!2d112.7831666!3d-7.2284247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7f9b58d608371%3A0xfd41e28de62d4374!2sPT%20NASIONAL%20FARINDO%20JAYA!5e0!3m2!1sen!2sid!4v1234567890"
+                    width="100%"
+                    height="300"
+                    style="border: 0"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    class="w-full h-48 sm:h-64 lg:h-full"
+                  >
+                  </iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section
+      id="kontak"
+      class="py-16 sm:py-20 relative bg-gradient-to-br from-slate-50 to-blue-50"
+    >
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12 sm:mb-16 stagger-fix">
+          <h2
+            class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 gradient-text section-title animate-on-load"
+          >
+            Kritik & Saran
+          </h2>
+          <p
+            class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto section-subtitle animate-on-load"
+          >
+            Berikan masukan Anda untuk pengembangan perusahaan kami
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div
+            class="glass rounded-3xl p-6 sm:p-8 shadow-2xl card-hover-improved"
+          >
+            <form id="feedbackForm" class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    for="name"
+                    class="block text-sm font-medium text-slate-700 mb-2"
+                  >
+                    Nama Lengkap
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                    placeholder="Masukkan nama lengkap"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="email"
+                    class="block text-sm font-medium text-slate-700 mb-2"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                    placeholder="Masukkan email"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="subject"
+                  class="block text-sm font-medium text-slate-700 mb-2"
+                >
+                  Subjek
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  required
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                  placeholder="Masukkan subjek pesan"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="message"
+                  class="block text-sm font-medium text-slate-700 mb-2"
+                >
+                  Pesan
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none resize-none"
+                  placeholder="Tuliskan kritik, saran, atau pertanyaan Anda..."
+                ></textarea>
+              </div>
+
+              <div class="flex items-center">
+                <input
+                  type="checkbox"
+                  id="consent"
+                  name="consent"
+                  required
+                  class="w-4 h-4 text-blue-600 bg-slate-100 border-slate-300 rounded focus:ring-blue-500 focus:ring-2"
+                />
+                <label for="consent" class="ml-2 text-sm text-slate-600">
+                  Saya setuju dengan kebijakan privasi dan pengolahan data
+                </label>
+              </div>
+
+              <div class="text-center">
+                <button
+                  type="submit"
+                  class="gradient-bg text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
+                >
+                  Kirim Pesan
+                  <i class="fas fa-paper-plane ml-2"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-gradient-to-b from-blue-200 to-purple-200 text-gray-700 py-8 sm:py-12 relative footer-border"
+    >
+      <div class="container mx-auto px-4 sm:px-6">
+        <div
+          class="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8"
+        >
+          <div>
+            <h4 class="font-bold mb-3 sm:mb-4 text-blue-800">Menu</h4>
+            <div class="space-y-1 sm:space-y-2 text-slate-400">
+              <div>
+                <a
+                  href="index.html"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  >Beranda</a
+                >
+              </div>
+              <div>
+                <a
+                  href="form.html"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  >Form</a
+                >
+              </div>
+              <div>
+                <a
+                  href="bank_data.html"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  >Bank Data</a
+                >
+              </div>
+              <div>
+                <a
+                  href="#galeri"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  >Galeri</a
+                >
+              </div>
+              <div>
+                <a
+                  href="#kontak"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  >Kontak</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-bold mb-3 sm:mb-4 text-blue-800">Sosial Media</h4>
+            <div class="flex space-x-3 sm:space-x-4">
+              <a
+                href="https://web.facebook.com/p/Nfj-home-61565662842390/"
+                class="social-hover w-8 h-8 sm:w-10 sm:h-10 gradient-bg rounded-lg text-white"
+              >
+                <i class="fab fa-facebook-f text-sm"></i>
+              </a>
+              <a
+                href="https://www.instagram.com/nfjhomeofficial/"
+                class="social-hover w-8 h-8 sm:w-10 sm:h-10 gradient-bg rounded-lg text-white"
+              >
+                <i class="fab fa-instagram text-sm"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/ptnasionalfarindojaya/"
+                class="social-hover w-8 h-8 sm:w-10 sm:h-10 gradient-bg rounded-lg text-white"
+              >
+                <i class="fab fa-linkedin-in text-sm"></i>
+              </a>
+              <a
+                href="https://tr.ee/PJ-023bVKD"
+                class="social-hover w-8 h-8 sm:w-10 sm:h-10 gradient-bg rounded-lg text-white"
+              >
+                <i class="fab fa-shopify text-sm"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="text-center space-y-3 sm:space-y-3 text-slate-400">
+          <p class="text-sm font-bold animate bounce-slow">
+            Sistem Manajemen Pabrik Terintegrasi, Made With ❤️ by Johnn.
+          </p>
+        </div>
+
+        <div
+          class="border-t border-slate-300 pt-6 sm:pt-8 text-center text-slate-500 text-sm sm:text-base"
+        >
+          <p>&copy; 2025 PT. Nasional Farindo Jaya. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script>
+      // Scroll Progress Bar
+      window.addEventListener("scroll", () => {
+        const winHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.pageYOffset;
+        const trackLength = docHeight - winHeight;
+        const progress = Math.floor((scrollTop / trackLength) * 100);
+
+        document.getElementById("scrollProgress").style.width = progress + "%";
+      });
+
+      // Mobile Menu Toggle
+      document
+        .getElementById("mobile-menu-button")
+        .addEventListener("click", function () {
+          const menu = document.getElementById("mobile-menu");
+          menu.classList.toggle("hidden");
+        });
+
+      // Back to Top Button
+      const backToTopButton = document.getElementById("backToTop");
+
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.style.display = "block";
+        } else {
+          backToTopButton.style.display = "none";
+        }
+      });
+
+      backToTopButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+
+      // PWA Installation
+      let deferredPrompt;
+      const installButton = document.getElementById("installButton");
+      const pwaInstallPopup = document.getElementById("pwaInstallPopup");
+      const closeInstallPopup = document.getElementById("closeInstallPopup");
+
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+
+        setTimeout(() => {
+          if (!localStorage.getItem("pwaInstallDismissed")) {
+            pwaInstallPopup.style.display = "flex";
+          }
+        }, 5000);
+      });
+
+      installButton.addEventListener("click", async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          if (outcome === "accepted") {
+            pwaInstallPopup.style.display = "none";
+          }
+          deferredPrompt = null;
+        }
+      });
+
+      closeInstallPopup.addEventListener("click", () => {
+        pwaInstallPopup.style.display = "none";
+        localStorage.setItem("pwaInstallDismissed", "true");
+      });
+
+      // Service Worker Registration
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("sw.js")
+            .then((registration) => {
+              console.log("SW registered: ", registration);
+            })
+            .catch((registrationError) => {
+              console.log("SW registration failed: ", registrationError);
+            });
+        });
+      }
+
+      // Navigation Active State - FIXED
+      document.addEventListener("DOMContentLoaded", function () {
+        const currentPage =
+          window.location.pathname.split("/").pop() || "index.html";
+
+        // Remove active class from all nav links
+        const allNavLinks = document.querySelectorAll(".nav-link");
+        allNavLinks.forEach((link) => link.classList.remove("active"));
+
+        // Add active class to current page
+        const currentNavLink = document.getElementById(
+          `nav-${getPageId(currentPage)}`
+        );
+        const currentMobileNavLink = document.getElementById(
+          `nav-${getPageId(currentPage)}-mobile`
+        );
+
+        if (currentNavLink) currentNavLink.classList.add("active");
+        if (currentMobileNavLink) currentMobileNavLink.classList.add("active");
+
+        function getPageId(pageName) {
+          const pageMap = {
+            "index.html": "home",
+            "form.html": "form",
+            "bank_data.html": "bank-data",
+            "#galeri": "galeri",
+            "#kontak": "kontak",
+          };
+          return pageMap[pageName] || "home";
+        }
+
+        // Load stock data when page loads
+        loadPreviewData();
+      });
+
+      // Typewriter Effect dengan Loop - FIXED
+      function setupTypewriter() {
+        const typewriterElement = document.getElementById("typewriterText");
+        if (!typewriterElement) return;
+
+        const text = "PT. Nasional Farindo Jaya";
+        typewriterElement.textContent = text;
+        typewriterElement.style.width = "0";
+        typewriterElement.style.animation = "none";
+
+        // Reset dan mulai animasi
+        setTimeout(() => {
+          typewriterElement.style.animation =
+            "typing 3s steps(40, end) forwards, " +
+            "blink-caret 0.75s step-end infinite, " +
+            "delete-text 3s steps(40, end) 3s forwards, " +
+            "final-blink 0.75s step-end 6s infinite";
+        }, 100);
+
+        // Loop animasi
+        setInterval(() => {
+          typewriterElement.style.animation = "none";
+          setTimeout(() => {
+            typewriterElement.style.animation =
+              "typing 3s steps(40, end) forwards, " +
+              "blink-caret 0.75s step-end infinite, " +
+              "delete-text 3s steps(40, end) 3s forwards, " +
+              "final-blink 0.75s step-end 6s infinite";
+          }, 50);
+        }, 6000); // Total durasi animasi: 6 detik
+      }
+
+      // Setup typewriter ketika halaman dimuat
+      document.addEventListener("DOMContentLoaded", setupTypewriter);
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Contact Form Handler dengan Google Sheets Integration
+      document
+        .getElementById("feedbackForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Collect form data
+          const formData = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            subject: document.getElementById("subject").value,
+            message: document.getElementById("message").value,
+            timestamp: new Date().toISOString(),
+          };
+
+          // Kirim data ke Google Apps Script
+          submitToGoogleSheets(formData);
+        });
+
+      // Function untuk submit ke Google Sheets
+      function submitToGoogleSheets(formData) {
+        // choose POST endpoint
+        const postUrl =
+          window.APP_SCRIPT_URL ||
+          "https://script.google.com/macros/s/AKfycbws4FZWSFSR9NPUpVI5lpoPXIaYB0EDtbKs8wMWOtPTqtJubiorpDN6IKSlwracNBfC8Q/exec";
+
+        fetch(postUrl, {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              alert(
+                "Terima kasih! Kritik dan saran Anda telah berhasil dikirim."
+              );
+              document.getElementById("feedbackForm").reset();
+            } else {
+              throw new Error("Network response was not ok");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Maaf, terjadi kesalahan. Silakan coba lagi.");
+          });
+      }
+
+      // STOCK MONITORING FUNCTIONS - DITAMBAHKAN
+      async function loadPreviewData() {
+        try {
+          // use Apps Script endpoint
+          const fetchUrl =
+            (window.APP_SCRIPT_URL ||
+              "https://script.google.com/macros/s/AKfycbws4FZWSFSR9NPUpVI5lpoPXIaYB0EDtbKs8wMWOtPTqtJubiorpDN6IKSlwracNBfC8Q/exec") +
+            "?sheet=stok_assembling";
+          console.log("[loadPreviewData] fetching from", fetchUrl);
+
+          // Gunakan JSONP fallback jika fetch normal gagal (CORS)
+          const data = await fetchWithJsonpFallback(fetchUrl);
+          console.log("[loadPreviewData] response data:", data);
+
+          if (data && data.success && data.data && data.data.length > 1) {
+            updatePreviewTable(data.data.slice(1)); // Skip header
+          } else {
+            console.warn(
+              "[loadPreviewData] response JSON (unexpected format):",
+              data
+            );
+            showStockError(
+              "Tidak ada data stok tersedia atau format respons tidak sesuai",
+              JSON.stringify(data)
+            );
+          }
+        } catch (error) {
+          console.error("Error loading preview data:", error);
+          showStockError("Gagal memuat data stok. Error: " + error.message);
+        }
+      }
+
+      function updatePreviewTable(data) {
+        const tbody = document.getElementById("previewTableBody");
+        tbody.innerHTML = "";
+
+        // Show only top 5 items with lowest stock
+        const sortedByStock = data
+          .filter((row) => row[8] !== undefined && row[8] !== "") // Pastikan ada data sisa stok
+          .sort((a, b) => (parseInt(a[8]) || 0) - (parseInt(b[8]) || 0))
+          .slice(0, 5);
+
+        if (sortedByStock.length === 0) {
+          showStockError("Tidak ada data stok");
+          return;
+        }
+
+        sortedByStock.forEach((row) => {
+          const tr = document.createElement("tr");
+          tr.className = "hover:bg-slate-50 transition";
+
+          // Barang (kolom B - index 1)
+          const tdBarang = document.createElement("td");
+          tdBarang.className = "font-medium text-slate-800";
+          tdBarang.textContent = row[1] || "-";
+          tr.appendChild(tdBarang);
+
+          // Warna (kolom C - index 2)
+          const tdWarna = document.createElement("td");
+          tdWarna.className = "text-slate-600";
+          tdWarna.textContent = row[2] || "-";
+          tr.appendChild(tdWarna);
+
+          // Ukuran (kolom D - index 3)
+          const tdUkuran = document.createElement("td");
+          tdUkuran.className = "text-slate-600";
+          tdUkuran.textContent = row[3] || "-";
+          tr.appendChild(tdUkuran);
+
+          // Tipe (kolom E - index 4)
+          const tdTipe = document.createElement("td");
+          tdTipe.className = "text-slate-600";
+          tdTipe.textContent = row[4] || "-";
+          tr.appendChild(tdTipe);
+
+          // Sisa Stok (kolom I - index 8)
+          const tdSisaStok = document.createElement("td");
+          const sisaStok = parseInt(row[8]) || 0;
+          tdSisaStok.textContent = sisaStok;
+
+          // Color code based on stock level
+          if (sisaStok === 0) {
+            tdSisaStok.className = "stock-low";
+          } else if (sisaStok < 10) {
+            tdSisaStok.className = "stock-medium";
+          } else {
+            tdSisaStok.className = "stock-good";
+          }
+
+          tr.appendChild(tdSisaStok);
+          tbody.appendChild(tr);
+        });
+      }
+
+      function showStockError(message, details) {
+        const tbody = document.getElementById("previewTableBody");
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="stock-loading text-red-500">
+              ${message}
+            </td>
+          </tr>
+        `;
+        if (details) {
+          // append collapsible debug row (details mainly for developer use)
+          const debugRow = document.createElement("tr");
+          const debugTd = document.createElement("td");
+          debugTd.colSpan = 5;
+          debugTd.style.fontSize = "12px";
+          debugTd.style.paddingTop = "8px";
+          debugTd.className = "text-xs text-slate-400";
+          debugTd.textContent = details;
+          debugRow.appendChild(debugTd);
+          tbody.appendChild(debugRow);
+        }
+      }
+
+      // Force animations to restart
+      function restartAnimations() {
+        // Restart typewriter
+        setupTypewriter();
+
+        // Restart stagger animations
+        const staggerElements = document.querySelectorAll(".stagger-fix > *");
+        staggerElements.forEach((el, index) => {
+          el.style.animation = "none";
+          setTimeout(() => {
+            el.style.animation = `slideIn 0.6s ease ${
+              0.1 * (index + 1)
+            }s forwards`;
+          }, 100);
+        });
+
+        // Restart animate-on-load elements
+        const animateElements = document.querySelectorAll(".animate-on-load");
+        animateElements.forEach((el, index) => {
+          el.style.animation = "none";
+          setTimeout(() => {
+            el.style.animation = `fadeInUp 0.8s ease ${0.2 * index}s forwards`;
+          }, 100);
+        });
+
+        console.log("Animations restarted successfully");
+      }
+
+      // Auto-refresh stock data every 30 seconds
+      setInterval(loadPreviewData, 30000);
+    </script>
+  </body>
+  "https://script.google.com/macros/s/AKfycbws4FZWSFSR9NPUpVI5lpoPXIaYB0EDtbKs8wMWOtPTqtJubiorpDN6IKSlwracNBfC8Q/exec");
+</html>

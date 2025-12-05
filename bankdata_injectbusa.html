@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Inject Busa - PT. Nasional Farindo Jaya</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="manifest" href="manifest.json" />
+
+    <style>
+      /* SAMA DENGAN STYLE DI bankdata_borongan.html */
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+      :root {
+        --primary: #3b82f6;
+        --primary-dark: #1e40af;
+        --secondary: #4e6dd4;
+        --accent: #15aec9;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        min-height: 100vh;
+      }
+
+      .glass {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+      }
+
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 50%,
+          var(--accent) 100%
+        );
+      }
+
+      .hero-bg {
+        background: linear-gradient(
+          135deg,
+          rgba(20, 56, 177, 0.9) 0%,
+          rgba(151, 117, 232, 0.8) 100%
+        );
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+
+      .nav-blur {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .nav-link {
+        position: relative;
+        transition: all 0.3s ease;
+        padding: 8px 0;
+      }
+
+      .nav-link.active {
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .nav-link.active::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--primary);
+      }
+
+      .table-container {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      th {
+        background-color: var(--primary);
+        color: white;
+        font-weight: 600;
+        position: sticky;
+        top: 0;
+      }
+
+      tr:hover {
+        background-color: #f1f5f9;
+      }
+
+      /* Mobile Card View */
+      .data-card {
+        display: none;
+        background: white;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+          0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        border-left: 4px solid var(--primary);
+      }
+
+      .data-card .card-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f1f5f9;
+      }
+
+      .data-card .card-row:last-child {
+        border-bottom: none;
+      }
+
+      .data-card .card-label {
+        font-weight: 600;
+        color: #4b5563;
+        flex: 1;
+      }
+
+      .data-card .card-value {
+        color: #1f2937;
+        text-align: right;
+        flex: 2;
+      }
+
+      @media (max-width: 768px) {
+        .table-container table {
+          display: none;
+        }
+
+        .data-card {
+          display: block;
+        }
+      }
+
+      /* Search Styles */
+      .search-container {
+        background-color: white;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+          0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      }
+
+      .search-input {
+        transition: all 0.3s ease;
+      }
+
+      .search-input:focus {
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      /* Loading Animation */
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(37, 99, 235, 0.3);
+        border-radius: 50%;
+        border-top-color: #2563eb;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .footer-border {
+        border-top: 1px solid #e5e7eb;
+      }
+
+      .social-hover {
+        transition: all 0.3s ease !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+
+      .social-hover:hover {
+        transform: translateY(-5px) scale(1.1) !important;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3) !important;
+      }
+
+      .bounce-slow {
+        animation: bounce-slow 3s ease-in-out infinite;
+      }
+
+      @keyframes bounce-slow {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-8px);
+        }
+        60% {
+          transform: translateY(-4px);
+        }
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Navigation -->
+    <nav class="nav-blur fixed top-0 w-full z-50">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="flex items-center justify-between py-4">
+          <div class="flex items-center space-x-4">
+            <div
+              class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl gradient-bg flex items-center justify-center shadow-lg"
+            >
+              <span class="text-white font-bold text-lg">NFJ</span>
+            </div>
+            <div class="hidden md:block">
+              <div class="text-lg font-bold text-slate-800">
+                PT. Nasional Farindo Jaya
+              </div>
+              <div class="text-sm text-slate-600">Divisi Assembling</div>
+            </div>
+          </div>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex items-center space-x-8">
+            <a
+              href="index.html"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative"
+              id="nav-home"
+              >Beranda</a
+            >
+            <a
+              href="form.html"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative"
+              id="nav-form"
+              >Form</a
+            >
+            <a
+              href="bank_data.html"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative active"
+              id="nav-bank-data"
+              >Bank Data</a
+            >
+            <a
+              href="index.html#galeri"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative"
+              id="nav-galeri"
+              >Galeri</a
+            >
+            <a
+              href="index.html#kontak"
+              class="bg-blue-600 text-white px-4 py-2 sm:px-6 sm:py-2 rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl text-sm sm:text-base"
+              id="nav-kontak"
+              >Kontak</a
+            >
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <button
+            id="mobile-menu-button"
+            class="md:hidden text-slate-700 text-xl"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div
+          id="mobile-menu"
+          class="hidden md:hidden pb-6 border-t border-slate-200 pt-4"
+        >
+          <div class="flex flex-col space-y-4 text-center">
+            <a
+              href="index.html"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+              id="nav-home-mobile"
+              >Beranda</a
+            >
+            <a
+              href="form.html"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+              id="nav-form-mobile"
+              >Form</a
+            >
+            <a
+              href="bank_data.html"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2 active"
+              id="nav-bank-data-mobile"
+              >Bank Data</a
+            >
+            <a
+              href="index.html#galeri"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+              id="nav-galeri-mobile"
+              >Galeri</a
+            >
+            <a
+              href="index.html#kontak"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+              id="nav-kontak-mobile"
+              >Kontak</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="hero-bg min-h-[40vh] flex items-center justify-center relative overflow-hidden pt-20 pb-20"
+    >
+      <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+        <div class="max-w-4xl mx-auto">
+          <h1
+            class="text-4xl sm:text-6xl md:text-7xl font-black mt-16 mb-2 text-white leading-tight"
+          >
+            Data Inject Busa
+          </h1>
+          <p
+            class="text-xl sm:text-2xl md:text-3xl text-blue-100 leading-relaxed max-w-3xl mx-auto"
+          >
+            Kelola dan lihat data produksi inject busa
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-8 bg-gradient-to-br from-slate-50 to-blue-50">
+      <div class="container mx-auto px-4">
+        <!-- Search Section -->
+        <div class="search-container">
+          <div
+            class="flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+          >
+            <div class="flex-1">
+              <label
+                for="searchInput"
+                class="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Cari data:
+              </label>
+              <div class="relative">
+                <input
+                  type="text"
+                  id="searchInput"
+                  placeholder="Ketik untuk mencari..."
+                  class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 search-input"
+                />
+                <div
+                  class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                >
+                  <i class="fas fa-search text-gray-400"></i>
+                </div>
+                <div
+                  id="searchLoading"
+                  class="absolute inset-y-0 right-0 pr-3 flex items-center hidden"
+                >
+                  <div class="loading"></div>
+                </div>
+              </div>
+            </div>
+            <div class="text-sm text-gray-600">
+              Menampilkan
+              <span id="dataCount" class="font-semibold">0</span> data
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="text-center py-12">
+          <div
+            class="loading mx-auto mb-4"
+            style="width: 40px; height: 40px"
+          ></div>
+          <p class="text-gray-600">Memuat data dari spreadsheet...</p>
+        </div>
+
+        <!-- Data Content -->
+        <div id="dataContent" class="hidden">
+          <!-- Data akan diisi oleh DataFetcher -->
+        </div>
+
+        <!-- Pagination -->
+        <div
+          class="mt-6 flex justify-between items-center hidden"
+          id="paginationContainer"
+        >
+          <div class="text-sm text-gray-600">
+            Halaman <span id="currentPage">1</span> dari
+            <span id="totalPages">1</span>
+          </div>
+          <div class="flex space-x-2">
+            <button
+              id="prevBtn"
+              class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition"
+            >
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button
+              id="nextBtn"
+              class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
+            >
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="text-center py-12 hidden">
+          <i class="fas fa-exclamation-triangle text-red-400 text-6xl mb-4"></i>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">
+            Gagal memuat data
+          </h3>
+          <p class="text-gray-500 mb-4">
+            Terjadi kesalahan saat mengambil data dari spreadsheet
+          </p>
+          <button
+            id="retryButton"
+            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          >
+            <i class="fas fa-redo mr-2"></i>Coba Lagi
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-gradient-to-b from-blue-200 to-teal-200 text-gray-700 py-12 sm:py-16 relative footer-border"
+    >
+      <div class="container mx-auto px-4 sm:px-6">
+        <div
+          class="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-10 mb-8 sm:mb-12"
+        >
+          <div>
+            <h4 class="font-bold mb-4 sm:mb-6 text-blue-800 text-lg">Menu</h4>
+            <div class="space-y-2 sm:space-y-3 text-slate-400">
+              <div>
+                <a
+                  href="index.html"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  >Beranda</a
+                >
+              </div>
+              <div>
+                <a
+                  href="form.html"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  >Form</a
+                >
+              </div>
+              <div>
+                <a
+                  href="bank_data.html"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  >Bank Data</a
+                >
+              </div>
+              <div>
+                <a
+                  href="index.html#galeri"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  >Galeri</a
+                >
+              </div>
+              <div>
+                <a
+                  href="index.html#kontak"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  >Kontak</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-bold mb-4 sm:mb-6 text-blue-800 text-lg">
+              Sosial Media
+            </h4>
+            <div class="flex space-x-4 sm:space-x-5">
+              <a
+                href="https://web.facebook.com/p/Nfj-home-61565662842390/"
+                class="social-hover w-10 h-10 sm:w-12 sm:h-12 gradient-bg rounded-lg text-white"
+              >
+                <i class="fab fa-facebook-f text-base"></i>
+              </a>
+              <a
+                href="https://www.instagram.com/nfjhomeofficial/"
+                class="social-hover w-10 h-10 sm:w-12 sm:h-12 gradient-bg rounded-lg text-white"
+              >
+                <i class="fab fa-instagram text-base"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/ptnasionalfarindojaya/"
+                class="social-hover w-10 h-10 sm:w-12 sm:h-12 gradient-bg rounded-lg text-white"
+              >
+                <i class="fab fa-linkedin-in text-base"></i>
+              </a>
+              <a
+                href="https://tr.ee/PJ-023bVKD"
+                class="social-hover w-10 h-10 sm:w-12 sm:h-12 gradient-bg rounded-lg text-white"
+              >
+                <i class="fab fa-shopify text-base"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mb-8">
+          <p class="text-sm font-bold text-slate-400">
+            Sistem Manajemen Pabrik Terintegrasi, Made With ❤️ by Johnn.
+          </p>
+        </div>
+
+        <div
+          class="border-t border-slate-300 pt-8 text-center text-slate-500 text-base"
+        >
+          <p>&copy; 2025 PT. Nasional Farindo Jaya. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/config.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/data-fetcher.js"></script>
+    <script src="js/form-configs.js"></script>
+
+    <script>
+      // Inisialisasi DataFetcher untuk injectbusa
+      document.addEventListener("DOMContentLoaded", function () {
+        const dataFetcher = new DataFetcher("injectbusa", "dataContent");
+      });
+    </script>
+  </body>
+</html>
