@@ -29,21 +29,65 @@ function formatDate(dateString, includeTime = true) {
 // Navigation scroll dan mobile menu
 function initNavigation() {
   // Mobile Menu Toggle
-  const mobileMenuButton = document.getElementById("mobile-menu-button");
-  const mobileMenu = document.getElementById("mobile-menu");
+  let mobileMenuButton = document.getElementById("mobile-menu-button");
+  let mobileMenu = document.getElementById("mobile-menu");
+
+  // Fallback selectors in case IDs were changed by formatting
+  if (!mobileMenuButton) {
+    mobileMenuButton =
+      document.querySelector("[data-mobile-menu-button]") ||
+      document.querySelector(".mobile-menu-button");
+  }
+  if (!mobileMenu) {
+    mobileMenu =
+      document.querySelector("[data-mobile-menu]") ||
+      document.querySelector("#mobile-menu");
+  }
+
+  if (mobileMenuButton) {
+    // Ensure button is clickable and on top
+    try {
+      mobileMenuButton.style.zIndex = mobileMenuButton.style.zIndex || "10001";
+      mobileMenuButton.style.cursor =
+        mobileMenuButton.style.cursor || "pointer";
+    } catch (e) {
+      /* ignore styling errors */
+    }
+  }
 
   if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener("click", function () {
+    // make button accessible
+    mobileMenuButton.setAttribute(
+      "aria-controls",
+      mobileMenu.id || "mobile-menu"
+    );
+    mobileMenuButton.setAttribute("aria-expanded", "false");
+
+    const toggleMenu = function () {
       mobileMenu.classList.toggle("hidden");
-      const icon = this.querySelector("i");
-      if (icon.classList.contains("fa-bars")) {
-        icon.classList.replace("fa-bars", "fa-times");
-      } else {
-        icon.classList.replace("fa-times", "fa-bars");
+      const expanded = mobileMenu.classList.contains("hidden")
+        ? "false"
+        : "true";
+      mobileMenuButton.setAttribute("aria-expanded", expanded);
+      const icon = mobileMenuButton.querySelector("i");
+      if (icon) {
+        if (icon.classList.contains("fa-bars")) {
+          icon.classList.replace("fa-bars", "fa-times");
+        } else if (icon.classList.contains("fa-times")) {
+          icon.classList.replace("fa-times", "fa-bars");
+        } else {
+          // ensure at least toggle classes
+          icon.classList.add("fa-bars");
+        }
       }
+    };
+
+    mobileMenuButton.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      toggleMenu();
     });
 
-    // Tutup menu saat klik di luar
+    // Close menu when clicking outside
     document.addEventListener("click", function (event) {
       if (
         !mobileMenu.contains(event.target) &&
@@ -51,8 +95,36 @@ function initNavigation() {
         !mobileMenu.classList.contains("hidden")
       ) {
         mobileMenu.classList.add("hidden");
+        mobileMenuButton.setAttribute("aria-expanded", "false");
         const icon = mobileMenuButton.querySelector("i");
-        if (icon.classList.contains("fa-times")) {
+        if (icon && icon.classList.contains("fa-times")) {
+          icon.classList.replace("fa-times", "fa-bars");
+        }
+      }
+    });
+
+    // Close menu on ESC
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !mobileMenu.classList.contains("hidden")) {
+        mobileMenu.classList.add("hidden");
+        mobileMenuButton.setAttribute("aria-expanded", "false");
+        const icon = mobileMenuButton.querySelector("i");
+        if (icon && icon.classList.contains("fa-times")) {
+          icon.classList.replace("fa-times", "fa-bars");
+        }
+      }
+    });
+
+    // Ensure menu hides on large screens after resize
+    window.addEventListener("resize", function () {
+      if (
+        window.innerWidth >= 768 &&
+        !mobileMenu.classList.contains("hidden")
+      ) {
+        mobileMenu.classList.add("hidden");
+        mobileMenuButton.setAttribute("aria-expanded", "false");
+        const icon = mobileMenuButton.querySelector("i");
+        if (icon && icon.classList.contains("fa-times")) {
           icon.classList.replace("fa-times", "fa-bars");
         }
       }
@@ -292,7 +364,7 @@ document.addEventListener("DOMContentLoaded", function () {
     try {
       populateSelectsFromConfig();
     } catch (e) {
-      console.warn('populateSelectsFromConfig failed:', e);
+      console.warn("populateSelectsFromConfig failed:", e);
     }
   }
 
@@ -332,7 +404,7 @@ function populateSelectsFromConfig() {
     });
   });
 
-  document.querySelectorAll('select').forEach((select) => {
+  document.querySelectorAll("select").forEach((select) => {
     const id = select.id;
     if (!id) return;
     const opts = fieldMap[id];
@@ -340,26 +412,26 @@ function populateSelectsFromConfig() {
 
     // preserve existing placeholder option (value === "") if present
     const placeholder = Array.from(select.children).find(
-      (c) => c.tagName === 'OPTION' && c.value === ''
+      (c) => c.tagName === "OPTION" && c.value === ""
     );
 
     // clear existing options
-    select.innerHTML = '';
+    select.innerHTML = "";
     if (placeholder) select.appendChild(placeholder);
 
     opts.forEach((o) => {
       let value, label;
-      if (typeof o === 'string') {
+      if (typeof o === "string") {
         value = o;
         label = o;
-      } else if (o && typeof o === 'object') {
+      } else if (o && typeof o === "object") {
         value = o.value;
         label = o.label || o.value;
       } else {
         return;
       }
 
-      const opt = document.createElement('option');
+      const opt = document.createElement("option");
       opt.value = value;
       opt.textContent = label;
       select.appendChild(opt);
