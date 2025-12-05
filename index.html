@@ -189,6 +189,62 @@
         border-bottom: 1px solid #e5e7eb;
       }
 
+      @media (max-width: 768px) {
+        .nav-blur {
+          padding: 8px 12px;
+        }
+
+        .nav-blur .container {
+          padding: 0 8px;
+        }
+
+        .nav-blur .flex {
+          gap: 8px;
+        }
+
+        .nav-blur .text-lg {
+          font-size: 16px !important;
+        }
+
+        .nav-blur .text-sm {
+          font-size: 12px !important;
+        }
+
+        .nav-blur .w-12 {
+          width: 40px !important;
+          height: 40px !important;
+        }
+
+        .nav-blur .w-14 {
+          width: 48px !important;
+          height: 48px !important;
+        }
+
+        .nav-blur a:not(.nav-link) {
+          padding: 8px 12px !important;
+          font-size: 13px !important;
+        }
+
+        #mobile-menu-button {
+          font-size: 18px !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-blur .text-lg {
+          font-size: 14px !important;
+        }
+
+        .nav-blur .text-sm {
+          font-size: 11px !important;
+        }
+
+        .nav-blur a:not(.nav-link) {
+          padding: 6px 10px !important;
+          font-size: 12px !important;
+        }
+      }
+
       /* Defensive: ensure navbar always visible on mobile
          Some mobile browsers / styles may hide or overlay the nav -
          force it above other content and reset opacity so it shows
@@ -267,6 +323,7 @@
         position: fixed;
         bottom: 20px;
         left: 20px;
+        right: 20px;
         z-index: 100;
         max-width: 300px;
         background: white;
@@ -275,6 +332,32 @@
         padding: 15px;
         display: none;
         animation: slideInUp 0.5s ease;
+      }
+
+      @media (max-width: 480px) {
+        #pwaInstallPopup {
+          left: 10px;
+          right: 10px;
+          bottom: 10px;
+          max-width: none;
+          padding: 12px;
+        }
+
+        #pwaInstallPopup p {
+          font-size: 13px !important;
+        }
+
+        #pwaInstallPopup button {
+          font-size: 12px !important;
+          padding: 4px 8px !important;
+        }
+
+        .pwa-logo {
+          width: 32px !important;
+          height: 32px !important;
+          font-size: 12px !important;
+          margin-right: 8px !important;
+        }
       }
 
       @keyframes slideInUp {
