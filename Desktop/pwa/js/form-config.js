@@ -1,6 +1,4 @@
-// js/form-configs.js
-// Konfigurasi untuk semua form
-
+// js/form-config.js - DIPERBAIKI
 const FORM_CONFIGS = {
   // FORM BORONGAN
   borongan: {
@@ -8,39 +6,47 @@ const FORM_CONFIGS = {
     redirectPage: "bankdata_borongan.html",
     successMessage: "✅ Data borongan berhasil disimpan!",
     fields: [
-      { id: "nama", name: "nama", label: "Nama", type: "text", required: true   , options: ["Vendon A", "Vendon B", "Pipa", "Seal", "Kawat"]
-},
+      {
+        id: "nama",
+        name: "nama",
+        label: "Nama",
+        type: "text",
+        required: true, // ← HANYA INI YANG REQUIRED
+      },
       {
         id: "barang",
         name: "barang",
         label: "Barang",
         type: "text",
-        required: true,
+        required: false, // ← TIDAK REQUIRED
       },
-      { id: "tipe", name: "tipe", label: "Tipe", type: "text", required: true   , options: ["Cream", "Macaroon"]
-},
+      {
+        id: "tipe",
+        name: "tipe",
+        label: "Tipe",
+        type: "text",
+        required: false, // ← TIDAK REQUIRED
+      },
       {
         id: "ukuran",
         name: "ukuran",
         label: "Ukuran",
         type: "text",
-        required: true,
-        , options: ["6 L", "8 L", "17 L", "26 L", "30 L"]
-},
+        required: false, // ← TIDAK REQUIRED
+      },
       {
         id: "warna",
         name: "warna",
         label: "Warna",
         type: "text",
-        required: true,
-        , options: ["Pink", "Merah", "Hijau", "Biru", "Ungu"]
-},
+        required: false, // ← TIDAK REQUIRED
+      },
       {
         id: "hasil",
         name: "hasil",
         label: "Hasil",
         type: "number",
-        required: true,
+        required: true, // ← HANYA INI YANG REQUIRED
         min: 0,
       },
     ],
@@ -58,39 +64,57 @@ const FORM_CONFIGS = {
         name: "shift",
         label: "Shift",
         type: "select",
-        required: true,
-        options: ["1", "2", "3"],
+        required: false, // ← TIDAK REQUIRED
+        options: [
+          { value: "1", label: "Pagi" },
+          { value: "2", label: "Malam" },
+        ],
       },
       {
         id: "ukuran",
         name: "ukuran",
         label: "Ukuran",
         type: "select",
-        required: true,
-        options: ["6 L", "8 L", "17 L", "26 L", "30 L"],
+        required: false, // ← TIDAK REQUIRED
+        options: [
+          { value: "6", label: "6 L" },
+          { value: "8", label: "8 L" },
+          { value: "17", label: "17 L" },
+          { value: "26", label: "26 L" },
+          { value: "30", label: "30 L" },
+        ],
       },
       {
         id: "tipe",
         name: "tipe",
         label: "Tipe",
         type: "select",
-        required: true,
-        options: ["Cream", "Macaroon"],
+        required: false, // ← TIDAK REQUIRED
+        options: [
+          { value: "Cream", label: "Cream" },
+          { value: "Macaroon", label: "Macaroon" },
+        ],
       },
       {
         id: "warna",
         name: "warna",
         label: "Warna",
         type: "select",
-        required: true,
-        options: ["Pink", "Merah", "Hijau", "Biru", "Ungu"],
+        required: false, // ← TIDAK REQUIRED
+        options: [
+          { value: "Pink", label: "Pink" },
+          { value: "Merah", label: "Merah" },
+          { value: "Hijau", label: "Hijau" },
+          { value: "Biru", label: "Biru" },
+          { value: "Ungu", label: "Ungu" },
+        ],
       },
       {
         id: "hasil",
         name: "hasil",
         label: "Hasil",
         type: "number",
-        required: true,
+        required: true, // ← HANYA INI YANG REQUIRED
         min: 0,
       },
     ],
@@ -107,20 +131,25 @@ const FORM_CONFIGS = {
         id: "nama",
         name: "nama",
         label: "Nama Barang",
-        type: "text",
-        required: true,
-        options: ["Vendon A", "Vendon B", "Pipa", "Seal", "Kawat"],
+        type: "select",
+        required: true, // ← REQUIRED
+        options: [
+          { value: "VendonA", label: "Vendon A" },
+          { value: "VendonB", label: "Vendon B" },
+          { value: "Pipa", label: "Pipa" },
+          { value: "Seal", label: "Seal" },
+          { value: "Kawat", label: "Kawat" },
+        ],
       },
       {
         id: "jumlah",
         name: "jumlah",
         label: "Kuantitas",
         type: "number",
-        required: true,
+        required: true, // ← REQUIRED
         min: 0,
       },
     ],
-    // Untuk sheet: Tanggal, Nama Barang, Kuantitas
     sheetOrder: ["nama", "jumlah"],
   },
 
@@ -131,43 +160,36 @@ const FORM_CONFIGS = {
     successMessage: "✅ Data kardus berhasil disimpan!",
     fields: [
       {
-        id: "shift",
-        name: "shift",
-        label: "Shift",
-        type: "select",
-        required: true,
-        options: ["Pagi", "Siang", "Malam"],
-      },
-      {
-        id: "ukuran",
-        name: "ukuran",
-        label: "Ukuran",
-        type: "select",
-        required: true,
+        id: "nama_kardus",
+        name: "nama_kardus",
+        label: "Nama Kardus",
+        type: "text",
+        required: true, // ← REQUIRED
       },
       {
         id: "tipe",
         name: "tipe",
         label: "Tipe",
-        type: "select",
-        required: true,
+        type: "text",
+        required: false, // ← TIDAK REQUIRED
       },
       {
-        id: "warna",
-        name: "warna",
-        label: "Warna",
-        type: "select",
-        required: true,
+        id: "ukuran",
+        name: "ukuran",
+        label: "Ukuran",
+        type: "text",
+        required: false, // ← TIDAK REQUIRED
       },
       {
-        id: "hasil",
-        name: "hasil",
-        label: "Hasil",
+        id: "jumlah",
+        name: "jumlah",
+        label: "Jumlah",
         type: "number",
-        required: true,
+        required: true, // ← REQUIRED
         min: 0,
       },
     ],
+    sheetOrder: ["nama_kardus", "tipe", "ukuran", "jumlah"],
   },
 
   // FORM PRODUKSI
@@ -181,44 +203,50 @@ const FORM_CONFIGS = {
         name: "shift",
         label: "Shift",
         type: "select",
-        required: true,
-        options: ["Pagi", "Siang", "Malam"],
+        required: false, // ← TIDAK REQUIRED
+        options: [
+          { value: "1", label: "Pagi" },
+          { value: "2", label: "Siang" },
+          { value: "3", label: "Malam" },
+        ],
       },
       {
         id: "nama_barang",
         name: "nama_barang",
         label: "Nama Barang",
         type: "text",
-        required: true,
+        required: true, // ← REQUIRED
       },
-      { id: "tipe", name: "tipe", label: "Tipe", type: "text", required: true   , options: ["Cream", "Macaroon"]
-},
+      {
+        id: "tipe",
+        name: "tipe",
+        label: "Tipe",
+        type: "text",
+        required: false, // ← TIDAK REQUIRED
+      },
       {
         id: "ukuran",
         name: "ukuran",
         label: "Ukuran",
         type: "text",
-        required: true,
-        , options: ["6 L", "8 L", "17 L", "26 L", "30 L"]
-},
+        required: false, // ← TIDAK REQUIRED
+      },
       {
         id: "warna",
         name: "warna",
         label: "Warna",
         type: "text",
-        required: true,
-        , options: ["Pink", "Merah", "Hijau", "Biru", "Ungu"]
-},
+        required: false, // ← TIDAK REQUIRED
+      },
       {
         id: "hasil",
         name: "hasil",
         label: "Hasil",
         type: "number",
-        required: true,
+        required: true, // ← REQUIRED
         min: 0,
       },
     ],
-    // Urutan kolom di spreadsheet (kecuali Timestamp yang ditambahkan server-side)
     sheetOrder: ["shift", "nama_barang", "tipe", "ukuran", "warna", "hasil"],
   },
 
@@ -233,18 +261,22 @@ const FORM_CONFIGS = {
         name: "nama_barang",
         label: "Nama Barang",
         type: "text",
-        required: true,
+        required: true, // ← REQUIRED
       },
       {
         id: "ukuran",
         name: "ukuran",
         label: "Ukuran",
         type: "text",
-        required: true,
-        , options: ["6 L", "8 L", "17 L", "26 L", "30 L"]
-},
-      { id: "tipe", name: "tipe", label: "Tipe", type: "text", required: true   , options: ["Cream", "Macaroon"]
-},
+        required: false, // ← TIDAK REQUIRED
+      },
+      {
+        id: "tipe",
+        name: "tipe",
+        label: "Tipe",
+        type: "text",
+        required: false, // ← TIDAK REQUIRED
+      },
       {
         id: "berat_kg",
         name: "berat_kg",
@@ -264,6 +296,14 @@ const FORM_CONFIGS = {
         step: 1,
       },
       {
+        id: "jumlah",
+        name: "jumlah",
+        label: "Jumlah",
+        type: "number",
+        required: true, // ← REQUIRED
+        min: 0,
+      },
+      {
         id: "keterangan",
         name: "keterangan",
         label: "Keterangan",
@@ -272,105 +312,16 @@ const FORM_CONFIGS = {
         maxLength: 500,
       },
     ],
-    // Tambahkan 'jumlah' karena spreadsheet memiliki kolom Jumlah
     sheetOrder: [
       "nama_barang",
-      "tipe",
       "ukuran",
+      "tipe",
       "berat_kg",
       "berat_grm",
       "jumlah",
       "keterangan",
     ],
   },
-
-  kardus: {
-    sheetName: "kardus",
-    redirectPage: "bankdata_kardus.html",
-    successMessage: "✅ Data kardus berhasil disimpan!",
-    fields: [
-      {
-        id: "nama_kardus",
-        name: "nama_kardus",
-        label: "Nama Kardus",
-        type: "text",
-        required: true,
-      },
-      { id: "tipe", name: "tipe", label: "Tipe", type: "text", required: true   , options: ["Cream", "Macaroon"]
-},
-      {
-        id: "ukuran",
-        name: "ukuran",
-        label: "Ukuran",
-        type: "text",
-        required: true,
-        , options: ["6 L", "8 L", "17 L", "26 L", "30 L"]
-},
-      {
-        id: "jumlah",
-        name: "jumlah",
-        label: "Jumlah",
-        type: "number",
-        required: true,
-        min: 0,
-      },
-    ],
-    sheetOrder: ["nama_kardus", "tipe", "ukuran", "jumlah"],
-  },
-
-  // FORM FEEDBACK/KONTAK
-  feedback: {
-    sheetName: "feedback",
-    redirectPage: "index.html#kontak",
-    successMessage: "✅ Terima kasih! Pesan Anda telah dikirim.",
-    fields: [
-      {
-        id: "name",
-        name: "name",
-        label: "Nama Lengkap",
-        type: "text",
-        required: true,
-        maxLength: 100,
-      },
-      {
-        id: "email",
-        name: "email",
-        label: "Email",
-        type: "email",
-        required: true,
-        maxLength: 100,
-      },
-      {
-        id: "subject",
-        name: "subject",
-        label: "Subjek",
-        type: "text",
-        required: true,
-        maxLength: 200,
-      },
-      {
-        id: "message",
-        name: "message",
-        label: "Pesan",
-        type: "textarea",
-        required: true,
-        maxLength: 1000,
-        rows: 5,
-      },
-    ],
-  },
 };
 
-// Export untuk penggunaan global
 window.FORM_CONFIGS = FORM_CONFIGS;
-
-// Helper untuk inisialisasi form
-window.initForm = function (formType) {
-  const config = FORM_CONFIGS[formType];
-  if (config) {
-    return new FormHandler(`${formType}Form`, config.sheetName);
-  } else {
-    console.error(`Config untuk form ${formType} tidak ditemukan`);
-    return null;
-  }
-};

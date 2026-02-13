@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
@@ -203,9 +203,12 @@
         border-radius: 20px;
         padding: 2px;
         background: linear-gradient(135deg, var(--primary), var(--secondary));
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
         mask-composite: xor;
-        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        -webkit-mask:
+          linear-gradient(#fff 0 0) content-box,
           linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
       }
@@ -467,27 +470,6 @@
         background: white;
       }
 
-      /* PERBAIKAN: Animasi bounce yang benar */
-      .bounce-slow {
-        animation: bounce-slow 3s ease-in-out infinite;
-      }
-
-      @keyframes bounce-slow {
-        0%,
-        20%,
-        50%,
-        80%,
-        100% {
-          transform: translateY(0);
-        }
-        40% {
-          transform: translateY(-8px);
-        }
-        60% {
-          transform: translateY(-4px);
-        }
-      }
-
       /* PERBAIKAN: Card content yang full height */
       .card-content-full {
         display: flex;
@@ -670,9 +652,12 @@
         border-radius: 20px;
         padding: 2px;
         background: linear-gradient(135deg, var(--primary), var(--secondary));
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
         mask-composite: xor;
-        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        -webkit-mask:
+          linear-gradient(#fff 0 0) content-box,
           linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
       }
@@ -1028,7 +1013,8 @@
         border-radius: 0.5rem;
         padding: 1rem;
         margin-bottom: 1rem;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+        box-shadow:
+          0 1px 3px 0 rgba(0, 0, 0, 0.1),
           0 1px 2px 0 rgba(0, 0, 0, 0.06);
         border-left: 4px solid var(--primary);
       }
@@ -1072,7 +1058,8 @@
         border-radius: 0.5rem;
         padding: 1.5rem;
         margin-bottom: 1.5rem;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+        box-shadow:
+          0 1px 3px 0 rgba(0, 0, 0, 0.1),
           0 1px 2px 0 rgba(0, 0, 0, 0.06);
       }
 
@@ -1106,7 +1093,8 @@
         background: white;
         border-radius: 0.5rem;
         padding: 1.5rem;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+        box-shadow:
+          0 1px 3px 0 rgba(0, 0, 0, 0.1),
           0 1px 2px 0 rgba(0, 0, 0, 0.06);
         border-top: 4px solid var(--primary);
       }
@@ -1197,39 +1185,34 @@
           <div class="hidden md:flex items-center space-x-8">
             <a
               href="index.html"
-              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
               id="nav-home"
+              >Beranda</a
             >
-              Beranda
-            </a>
             <a
               href="form.html"
-              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
               id="nav-form"
+              >Form</a
             >
-              Form
-            </a>
             <a
               href="bank_data.html"
-              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative active"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2 active"
               id="nav-bank-data"
+              >Bank Data</a
             >
-              Bank Data
-            </a>
             <a
               href="index.html#galeri"
-              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
               id="nav-galeri"
+              >Galeri</a
             >
-              Galeri
-            </a>
             <a
               href="index.html#kontak"
-              class="bg-blue-600 text-white px-4 py-2 sm:px-6 sm:py-2 rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl text-sm sm:text-base"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
               id="nav-kontak"
+              >Kontak</a
             >
-              Kontak
-            </a>
           </div>
 
           <!-- Mobile Menu Button -->
@@ -1488,35 +1471,35 @@
               <div>
                 <a
                   href="index.html"
-                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
                   >Beranda</a
                 >
               </div>
               <div>
                 <a
                   href="form.html"
-                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
                   >Form</a
                 >
               </div>
               <div>
                 <a
                   href="bank_data.html"
-                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2 active"
                   >Bank Data</a
                 >
               </div>
               <div>
                 <a
                   href="index.html#galeri"
-                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
                   >Galeri</a
                 >
               </div>
               <div>
                 <a
                   href="index.html#kontak"
-                  class="hover:text-blue-600 transition text-sm sm:text-base"
+                  class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
                   >Kontak</a
                 >
               </div>
@@ -1557,12 +1540,6 @@
         </div>
 
         <!-- PERBAIKAN: Text dengan animasi bounce yang benar -->
-        <div class="text-center mb-8">
-          <p class="text-sm font-bold bounce-slow text-slate-400">
-            Sistem Manajemen Pabrik Terintegrasi, Made With ❤️ by Johnn.
-          </p>
-        </div>
-
         <div
           class="border-t border-slate-300 pt-8 text-center text-slate-500 text-base"
         >
@@ -1677,8 +1654,8 @@
           }?sheet=${encodeURIComponent(SPREADSHEET_CONFIG.sheetName)}`;
           console.log("[loadDataFromSheet] fetching", fetchUrl);
 
-          // Gunakan JSONP fallback jika fetch normal gagal (CORS)
-          const data = await fetchWithJsonpFallback(fetchUrl);
+          // Gunakan fallback fetch dengan JSONP support untuk CORS compatibility
+          const data = await window.fetchWithFallback(fetchUrl);
 
           if (data.success) {
             // Skip header rows
@@ -1689,7 +1666,7 @@
             updatePagination();
           } else {
             throw new Error(
-              data.message || "Gagal mengambil data dari spreadsheet"
+              data.message || "Gagal mengambil data dari spreadsheet",
             );
           }
         } catch (error) {
@@ -1728,7 +1705,7 @@
           filteredData = currentData.filter((row) => {
             return row.some(
               (cell) =>
-                cell && cell.toString().toLowerCase().includes(lowerQuery)
+                cell && cell.toString().toLowerCase().includes(lowerQuery),
             );
           });
         }
@@ -1787,7 +1764,7 @@
           totalItems: totalItems.size,
           totalStock,
           lowStock,
-          outOfStock
+          outOfStock,
         });
       }
 
@@ -1806,7 +1783,7 @@
         const startIndex = (currentPage - 1) * rowsPerPage;
         const endIndex = Math.min(
           startIndex + rowsPerPage,
-          filteredData.length
+          filteredData.length,
         );
         const pageData = filteredData.slice(startIndex, endIndex);
 
@@ -1870,7 +1847,7 @@
                 .toString()
                 .replace(
                   new RegExp(searchInput.value, "gi"),
-                  (match) => `<span class="bg-yellow-200">${match}</span>`
+                  (match) => `<span class="bg-yellow-200">${match}</span>`,
                 );
             }
             tr.appendChild(td);
@@ -1938,7 +1915,7 @@
                   .toString()
                   .replace(
                     new RegExp(searchInput.value, "gi"),
-                    (match) => `<span class="bg-yellow-200">${match}</span>`
+                    (match) => `<span class="bg-yellow-200">${match}</span>`,
                   );
               } else {
                 // Format tanggal juga untuk mobile card
@@ -1993,11 +1970,11 @@
 
         // Add appropriate class to current sort column
         const currentTh = document.querySelector(
-          `th[data-sort="${sortColumn}"]`
+          `th[data-sort="${sortColumn}"]`,
         );
         if (currentTh) {
           currentTh.classList.add(
-            sortDirection === "asc" ? "sort-asc" : "sort-desc"
+            sortDirection === "asc" ? "sort-asc" : "sort-desc",
           );
         }
 
@@ -2020,7 +1997,7 @@
           // Handle numeric values
           if (
             ["stokAwal", "masuk", "keluar", "sisaStok", "stokOpname"].includes(
-              sortColumn
+              sortColumn,
             )
           ) {
             aValue = parseFloat(aValue) || 0;
