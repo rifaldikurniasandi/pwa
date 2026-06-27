@@ -32,8 +32,11 @@ class FormHandler {
 async handleSubmit(e) {
   e.preventDefault();
 
-  // Cari field keterangan, jika ada, hapus status required-nya secara paksa sebelum diperiksa
-  const inputKeterangan = this.form.querySelector('[name="keterangan"]');
+  // Matikan validasi bawaan browser secara total pada form ini
+  this.form.setAttribute('novalidate', 'true');
+
+  // Cari field keterangan berdasarkan id atau name, lalu copot required-nya
+  const inputKeterangan = this.form.querySelector('#keterangan, [name="keterangan"], [name="Keterangan"]');
   if (inputKeterangan) {
     inputKeterangan.required = false;
     inputKeterangan.removeAttribute('required');
