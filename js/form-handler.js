@@ -29,14 +29,20 @@ class FormHandler {
     console.log(`FormHandler initialized for: ${this.configKey}`);
   }
 
-  async handleSubmit(e) {
-    e.preventDefault();
+async handleSubmit(e) {
+  e.preventDefault();
 
-    if (!this.form.checkValidity()) {
-      this.showToast("Mohon isi semua field yang diperlukan", { type: "error" });
-      return;
-    }
+  // Cari field keterangan, jika ada, hapus status required-nya secara paksa sebelum diperiksa
+  const inputKeterangan = this.form.querySelector('[name="keterangan"]');
+  if (inputKeterangan) {
+    inputKeterangan.required = false;
+    inputKeterangan.removeAttribute('required');
+  }
 
+  if (!this.form.checkValidity()) { 
+    this.showToast("Mohon isi semua field yang diperlukan", { type: "error" });
+    return;
+  }
     const formData = this.collectFormData();
     const submitButton = this.form.querySelector('button[type="submit"]');
     const originalText = submitButton ? submitButton.textContent : "";
