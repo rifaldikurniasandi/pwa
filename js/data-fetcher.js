@@ -60,7 +60,7 @@ class DataFetcher {
 
       const url = `${
         window.APP_SCRIPT_URL ||
-        "https://script.google.com/macros/s/AKfycbzyitctci0U0IgsgPbDdu9cClx8fGebXAKGNUop5sGj_IQSm0s5aagmdP8kcAz7symE-w/exec"
+        "https://script.google.com/macros/s/AKfycbw7mpK9LPKIdd7VJtRTMeZma0mFclImdlAaHlVvNMp1_-i74EXfXI7K1fRlfSWfAi3ddg/exec"
       }?sheet=${encodeURIComponent(this.sheetName)}&t=${Date.now()}`;
 
       const result = window.fetchWithFallback
@@ -76,7 +76,7 @@ class DataFetcher {
 
       const normalized = this.normalizeResponse(result);
       this.headers = normalized.headers;
-      this.allData = normalized.rows;
+      this.allData = normalized.rows.reverse(); // Menampilkan data terbaru di atas
       this.filteredData = [...this.allData];
       this.currentPage = 1;
       this.displayData();

@@ -1,7 +1,7 @@
 // js/config.js - KONFIGURASI UTAMA
 // URL Apps Script v2.0 dengan Auto-Stock & Validation
 window.APP_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzyitctci0U0IgsgPbDdu9cClx8fGebXAKGNUop5sGj_IQSm0s5aagmdP8kcAz7symE-w/exec";
+  "https://script.google.com/macros/s/AKfycbw7mpK9LPKIdd7VJtRTMeZma0mFclImdlAaHlVvNMp1_-i74EXfXI7K1fRlfSWfAi3ddg/exec";
 
 // API Key untuk authentication
 // NOTE: API key must NOT be committed. Replace locally using js/config.js (ignored).

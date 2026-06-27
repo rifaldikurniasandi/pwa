@@ -191,7 +191,7 @@ class FormHandler {
   async submitToGoogleSheets(formData) {
     let url =
       window.APP_SCRIPT_URL ||
-      "https://script.google.com/macros/s/AKfycbzyitctci0U0IgsgPbDdu9cClx8fGebXAKGNUop5sGj_IQSm0s5aagmdP8kcAz7symE-w/exec";
+      "https://script.google.com/macros/s/AKfycbw7mpK9LPKIdd7VJtRTMeZma0mFclImdlAaHlVvNMp1_-i74EXfXI7K1fRlfSWfAi3ddg/exec";
 
   if (window.API_KEY && window.API_KEY !== "sk_live_REPLACE_ME_DO_NOT_COMMIT") {
     const separator = url.includes("?") ? "&" : "?";
