@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./icons/icon-72X72.png">
     <title>Bank Data - PT. Nasional Farindo Jaya</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
@@ -215,6 +216,26 @@
       .social-hover:hover {
         transform: translateY(-5px) scale(1.1) !important;
         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3) !important;
+      }
+
+      .bounce-slow {
+        animation: bounce-slow 3s ease-in-out infinite;
+      }
+
+      @keyframes bounce-slow {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-8px);
+        }
+        60% {
+          transform: translateY(-4px);
+        }
       }
 
       @media (max-width: 768px) {
@@ -616,6 +637,12 @@
               </a>
             </div>
           </div>
+        </div>
+
+        <div class="text-center mb-8">
+          <p class="text-sm font-bold bounce-slow text-slate-400">
+            Sistem Manajemen Pabrik Terintegrasi, Made With ❤️ by Johnn.
+          </p>
         </div>
 
         <div

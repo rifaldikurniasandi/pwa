@@ -1,7 +1,11 @@
 // js/config.js - KONFIGURASI UTAMA
-// JANGAN GANTI URL INI - Ini adalah URL Apps Script yang benar
+// URL Apps Script v2.0 dengan Auto-Stock & Validation
 window.APP_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbws4FZWSFSR9NPUpVI5lpoPXIaYB0EDtbKs8wMWOtPTqtJubiorpDN6IKSlwracNBfC8Q/exec";
+  "https://script.google.com/macros/s/AKfycbw7mpK9LPKIdd7VJtRTMeZma0mFclImdlAaHlVvNMp1_-i74EXfXI7K1fRlfSWfAi3ddg/exec";
+
+// API Key untuk authentication
+// NOTE: API key must NOT be committed. Replace locally using js/config.js (ignored).
+window.API_KEY = "sk_live_REPLACE_ME_DO_NOT_COMMIT";
 window.SPREADSHEET_ID = "1BfIQmLYeuD-bTvmdGBOVWWcBDVWQI_NPwW2TDlh4Mxc";
 
 // Helper function untuk fetch dengan JSONP fallback (untuk CORS compatibility)

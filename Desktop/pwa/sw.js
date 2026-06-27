@@ -1,7 +1,5 @@
-const CACHE_NAME = "sistem-pabrik-v1.3";
-// Only cache local app assets. Avoid caching external CDNs which can
-// fail on some mobile networks and cause the service worker install
-// to fail (manifested as ERR_CONNECTION_RESET on some devices).
+const CACHE_NAME = "sistem-pabrik-v1.4";
+
 const urlsToCache = [
   "./",
   "index.html",
@@ -20,9 +18,7 @@ const urlsToCache = [
   "bankdata_ambilbarang.html",
   "bankdata_produksi.html",
   "bankdata_komponen.html",
-  "js/config.js",
   "js/common.js",
-  "js/index-script.js",
   "js/form-handler.js",
   "js/form-config.js",
   "js/data-fetcher.js",
@@ -30,74 +26,76 @@ const urlsToCache = [
 ];
 
 self.addEventListener("install", function (event) {
-  // Use a tolerant install: try to cache local resources, but don't
-  // fail the install if some items fail to fetch (e.g. network reset).
   event.waitUntil(
     (async function () {
       const cache = await caches.open(CACHE_NAME);
-      // Use Promise.allSettled so one failing request doesn't fail the whole install
       const results = await Promise.allSettled(
         urlsToCache.map((url) => cache.add(url)),
       );
 
-      // Optionally log failures for debugging
-      results.forEach((r, i) => {
-        if (r.status === "rejected") {
-          console.warn("SW: cache failed for", urlsToCache[i], r.reason);
+      results.forEach((result, index) => {
+        if (result.status === "rejected") {
+          console.warn("SW: cache failed for", urlsToCache[index], result.reason);
         }
       });
-      return;
+
+      await self.skipWaiting();
     })(),
   );
 });
 
 self.addEventListener("fetch", function (event) {
-  // Network first strategy untuk API calls (spreadsheet data)
-  if (event.request.url.includes("script.google.com")) {
+  const requestUrl = new URL(event.request.url);
+
+  if (requestUrl.hostname.includes("script.google.com")) {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
-          // Cache successful responses
           if (response.ok) {
-            const cache = caches.open(CACHE_NAME);
-            cache.then((c) => c.put(event.request, response.clone()));
+            caches
+              .open(CACHE_NAME)
+              .then((cache) => cache.put(event.request, response.clone()));
           }
           return response;
         })
-        .catch(() => {
-          // Fallback ke cache jika network gagal
-          return caches.match(event.request);
-        }),
+        .catch(() => caches.match(event.request)),
     );
-  } else {
-    // Cache first strategy untuk app assets
-    event.respondWith(
-      caches.match(event.request).then(function (response) {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request).catch(() => {
-          // Offline fallback
-          if (event.request.destination === "document") {
-            return caches.match("index.html");
-          }
-        });
-      }),
-    );
+    return;
   }
+
+  if (requestUrl.pathname.endsWith("/js/config.js")) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
+  event.respondWith(
+    caches.match(event.request).then(function (response) {
+      if (response) return response;
+
+      return fetch(event.request).catch(() => {
+        if (event.request.destination === "document") {
+          return caches.match("index.html");
+        }
+        return undefined;
+      });
+    }),
+  );
 });
 
 self.addEventListener("activate", function (event) {
   event.waitUntil(
-    caches.keys().then(function (cacheNames) {
-      return Promise.all(
-        cacheNames.map(function (cacheName) {
-          if (cacheName !== CACHE_NAME) {
-            console.log("Deleting old cache:", cacheName);
-            return caches.delete(cacheName);
-          }
-        }),
-      );
-    }),
+    caches
+      .keys()
+      .then((cacheNames) =>
+        Promise.all(
+          cacheNames.map((cacheName) => {
+            if (cacheName !== CACHE_NAME) {
+              return caches.delete(cacheName);
+            }
+            return false;
+          }),
+        ),
+      )
+      .then(() => self.clients.claim()),
   );
 });

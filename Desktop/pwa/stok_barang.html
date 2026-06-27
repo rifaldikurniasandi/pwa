@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="./icons/icon-72X72.png">
     <title>Barang Assembling - PT. Nasional Farindo Jaya</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
@@ -1146,6 +1147,18 @@
       th.sortable.sort-desc::after {
         content: "";
       }
+      /* Spinning animation for refresh button */
+      @keyframes fa-spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .fa-spin {
+        animation: fa-spin 2s linear infinite;
+      }
     </style>
   </head>
   <body class="antialiased">
@@ -1352,6 +1365,14 @@
                 Menampilkan
                 <span id="dataCount" class="font-semibold">0</span> data
               </div>
+              <button
+                id="refreshButton"
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm flex items-center gap-2"
+                title="Refresh data dari spreadsheet"
+              >
+                <i class="fas fa-sync-alt"></i>
+                <span class="hidden sm:inline">Refresh</span>
+              </button>
             </div>
           </div>
         </div>
@@ -1560,7 +1581,7 @@
         scriptUrl:
           window && window.APP_SCRIPT_URL
             ? window.APP_SCRIPT_URL
-            : "https://script.google.com/macros/s/AKfycbws4FZWSFSR9NPUpVI5lpoPXIaYB0EDtbKs8wMWOtPTqtJubiorpDN6IKSlwracNBfC8Q/exec",
+            : "https://script.google.com/macros/s/AKfycbw7mpK9LPKIdd7VJtRTMeZma0mFclImdlAaHlVvNMp1_-i74EXfXI7K1fRlfSWfAi3ddg/exec",
         // Nama sheet untuk data stok assembling
         sheetName: "stok_assembling",
         // Jumlah baris header (biasanya 1)
@@ -1620,6 +1641,19 @@
         document
           .getElementById("retryButton")
           .addEventListener("click", loadDataFromSheet);
+
+        // Refresh button (with spinning animation)
+        const refreshButton = document.getElementById("refreshButton");
+        if (refreshButton) {
+          refreshButton.addEventListener("click", async () => {
+            const icon = refreshButton.querySelector("i");
+            icon.classList.add("fa-spin");
+            refreshButton.disabled = true;
+            await loadDataFromSheet();
+            icon.classList.remove("fa-spin");
+            refreshButton.disabled = false;
+          });
+        }
 
         // Setup sorting
         document.querySelectorAll("th.sortable").forEach((th) => {

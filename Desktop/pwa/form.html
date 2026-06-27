@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="./icons/icon-72X72.png">
     <title>Form Input Data - PT. Nasional Farindo Jaya</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
@@ -226,6 +227,26 @@
         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3) !important;
       }
 
+      .bounce-slow {
+        animation: bounce-slow 3s ease-in-out infinite;
+      }
+
+      @keyframes bounce-slow {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-8px);
+        }
+        60% {
+          transform: translateY(-4px);
+        }
+      }
+
       @media (max-width: 768px) {
         .hero-bg {
           background-attachment: scroll;
@@ -379,8 +400,8 @@
             <div class="p-6 bg-white card-body-flex h-full">
               <div class="card-text-grow mb-6">
                 <p class="text-slate-600 text-base leading-relaxed">
-                  Input data borongan (nama, barang, tipe, ukuran, warna, dan
-                  hasil).
+                  Input data borongan (Nama, Barang, Tipe, Ukuran, Warna, dan
+                  Hasil).
                 </p>
               </div>
               <a
@@ -408,8 +429,8 @@
             <div class="p-6 bg-white card-body-flex h-full">
               <div class="card-text-grow mb-6">
                 <p class="text-slate-600 text-base leading-relaxed">
-                  Input data inject busa (shift, ukuran, warna, tipe, dan
-                  hasil).
+                  Input data inject busa (Shift, Ukuran, Warna, Tipe, dan
+                  Hasil).
                 </p>
               </div>
               <a
@@ -437,7 +458,7 @@
             <div class="p-6 bg-white card-body-flex h-full">
               <div class="card-text-grow mb-6">
                 <p class="text-slate-600 text-base leading-relaxed">
-                  Input data kardus (shift, ukuran, tipe, warna, dan hasil).
+                  Input data kardus (Nama Kardus, Tipe, Ukuran, dan Jumlah).
                 </p>
               </div>
               <a
@@ -465,8 +486,8 @@
             <div class="p-6 bg-white card-body-flex h-full">
               <div class="card-text-grow mb-6">
                 <p class="text-slate-600 text-base leading-relaxed">
-                  Input data pengambilan barang (nama, barang, warna, ukuran,
-                  tipe, jumlah).
+                  Input data pengambilan barang (Nama Barang, Tipe, Ukuran,
+                  Satuan, dan Jumlah).
                 </p>
               </div>
               <a
@@ -494,8 +515,8 @@
             <div class="p-6 bg-white card-body-flex h-full">
               <div class="card-text-grow mb-6">
                 <p class="text-slate-600 text-base leading-relaxed">
-                  Input data produksi (shift, nama barang, tipe, ukuran, warna,
-                  dan hasil).
+                  Input data produksi (Shift, Nama Barang, Tipe, Ukuran, Warna,
+                  dan Hasil).
                 </p>
               </div>
               <a
@@ -525,8 +546,8 @@
             <div class="p-6 bg-white card-body-flex h-full">
               <div class="card-text-grow mb-6">
                 <p class="text-slate-600 text-base leading-relaxed">
-                  Input data komponen barang (nama barang, ukuran, tipe, berat,
-                  keterangan).
+                  Input data komponen barang (Nama Barang, Ukuran, Tipe, Berat, Jumlah, dan 
+                  Keterangan).
                 </p>
               </div>
               <a
@@ -621,6 +642,13 @@
             </div>
           </div>
         </div>
+
+        <div class="text-center mb-8">
+          <p class="text-sm font-bold bounce-slow text-slate-400">
+            Sistem Manajemen Pabrik Terintegrasi, Made With ❤️ by Johnn.
+          </p>
+        </div>
+
         <div
           class="border-t border-slate-300 pt-8 text-center text-slate-500 text-base"
         >
