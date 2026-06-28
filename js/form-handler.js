@@ -200,7 +200,7 @@ async handleSubmit(e) {
   async submitToGoogleSheets(formData) {
     let url =
       window.APP_SCRIPT_URL ||
-      "https://script.google.com/macros/s/AKfycbweloOhvUmixkeSFW56neBmEm-X40aejJ_EBSzhjWVVPXTN2kuVjZJjdXCkqfKiAmreYQ/exec";
+      "https://script.google.com/macros/s/AKfycbwDHUenYXMAEhqX70Jli_aiNWT6AKDO1jn8sa6qdtWxbpffVfCmh9rPlT_fVtM_iow_LQ/exec";
 
   if (window.API_KEY && window.API_KEY !== "sk_live_REPLACE_ME_DO_NOT_COMMIT") {
     const separator = url.includes("?") ? "&" : "?";
