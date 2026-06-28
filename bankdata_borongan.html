@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="./icons/icon-72X72.png">
-    <title>Data Borongan - PT. Nasional Farindo Jaya</title>
+        <link rel="icon" href="./icons/icon-72X72.png">
+    <title>Form Borongan - PT. Nasional Farindo Jaya</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
@@ -16,7 +16,6 @@
     <link rel="manifest" href="manifest.json" />
 
     <style>
-      /* SAMA DENGAN STYLE DI bankdata_borongan.html */
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
       :root {
@@ -86,114 +85,22 @@
         background: var(--primary);
       }
 
-      .table-container {
-        overflow-x: auto;
+      .form-container {
+        max-width: 800px;
+        margin: 0 auto;
       }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-
-      th,
-      td {
-        padding: 12px 15px;
-        text-align: left;
-        border-bottom: 1px solid #e2e8f0;
-      }
-
-      th {
-        background-color: var(--primary);
+      .button-hover {
+        padding: 10px 20px;
         color: white;
-        font-weight: 600;
-        position: sticky;
-        top: 0;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: box-shadow 0.3s ease;
       }
 
-      tr:hover {
-        background-color: #f1f5f9;
-      }
-
-      /* Mobile Card View */
-      .data-card {
-        display: none;
-        background: white;
-        border-radius: 0.5rem;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        box-shadow:
-          0 1px 3px 0 rgba(0, 0, 0, 0.1),
-          0 1px 2px 0 rgba(0, 0, 0, 0.06);
-        border-left: 4px solid var(--primary);
-      }
-
-      .data-card .card-row {
-        display: flex;
-        justify-content: space-between;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #f1f5f9;
-      }
-
-      .data-card .card-row:last-child {
-        border-bottom: none;
-      }
-
-      .data-card .card-label {
-        font-weight: 600;
-        color: #4b5563;
-        flex: 1;
-      }
-
-      .data-card .card-value {
-        color: #1f2937;
-        text-align: right;
-        flex: 2;
-      }
-
-      @media (max-width: 768px) {
-        .table-container table {
-          display: none;
-        }
-
-        .data-card {
-          display: block;
-        }
-      }
-
-      /* Search Styles */
-      .search-container {
-        background-color: white;
-        border-radius: 0.5rem;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        box-shadow:
-          0 1px 3px 0 rgba(0, 0, 0, 0.1),
-          0 1px 2px 0 rgba(0, 0, 0, 0.06);
-      }
-
-      .search-input {
-        transition: all 0.3s ease;
-      }
-
-      .search-input:focus {
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-      }
-
-      /* Loading Animation */
-      .loading {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: 3px solid rgba(37, 99, 235, 0.3);
-        border-radius: 50%;
-        border-top-color: #2563eb;
-        animation: spin 1s ease-in-out infinite;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
+      .button-hover:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
       }
 
       .footer-border {
@@ -212,23 +119,20 @@
         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3) !important;
       }
 
-      .bounce-slow {
-        animation: bounce-slow 3s ease-in-out infinite;
+      /* Loading Animation */
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(37, 99, 235, 0.3);
+        border-radius: 50%;
+        border-top-color: #2563eb;
+        animation: spin 1s ease-in-out infinite;
       }
 
-      @keyframes bounce-slow {
-        0%,
-        20%,
-        50%,
-        80%,
-        100% {
-          transform: translateY(0);
-        }
-        40% {
-          transform: translateY(-8px);
-        }
-        60% {
-          transform: translateY(-4px);
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
         }
       }
     </style>
@@ -256,16 +160,17 @@
           <div class="hidden md:flex items-center space-x-8">
             <a
               href="index.html"
-              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative"
               id="nav-home"
               >Beranda</a
             >
-            <a
+          <a
               href="form.html"
-              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2 active"
               id="nav-form"
               >Form</a
             >
+          
             <a
               href="bank_data.html"
               class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2 active"
@@ -274,13 +179,13 @@
             >
             <a
               href="index.html#galeri"
-              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative"
               id="nav-galeri"
               >Galeri</a
             >
             <a
               href="index.html#kontak"
-              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium relative"
               id="nav-kontak"
               >Kontak</a
             >
@@ -307,15 +212,10 @@
               id="nav-home-mobile"
               >Beranda</a
             >
-            <a
-              href="form.html"
-              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
-              id="nav-form-mobile"
-              >Form</a
-            >
+            <a href="form.html" class=" active" id="nav-form-mobile">Form</a>
             <a
               href="bank_data.html"
-              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2 active"
+              class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
               id="nav-bank-data-mobile"
               >Bank Data</a
             >
@@ -345,122 +245,121 @@
           <h1
             class="text-4xl sm:text-6xl md:text-7xl font-black mt-16 mb-2 text-white leading-tight"
           >
-            Data Borongan
+            Form Borongan
           </h1>
           <p
             class="text-xl sm:text-2xl md:text-3xl text-blue-100 leading-relaxed max-w-3xl mx-auto"
           >
-            Kelola dan lihat data produksi borongan
+            Input data hasil borongan
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Main Content -->
+    <!-- Form Section -->
     <section class="py-8 bg-gradient-to-br from-slate-50 to-blue-50">
       <div class="container mx-auto px-4">
-        <!-- Search Section -->
-        <div class="search-container">
-          <div
-            class="flex flex-col md:flex-row md:items-center md:justify-between gap-4"
-          >
-            <div class="flex-1">
-              <label
-                for="searchInput"
-                class="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Cari data:
-              </label>
-              <div class="relative">
+        <div
+          class="form-container bg-white rounded-lg shadow-lg p-6 md:p-8 glass"
+        >
+          <form id="boronganForm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="nama" class="block text-gray-700 font-medium mb-2"
+                  >Nama</label
+                >
                 <input
                   type="text"
-                  id="searchInput"
-                  placeholder="Ketik untuk mencari..."
-                  class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 search-input"
+                  id="nama"
+                  name="nama"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  
                 />
-                <div
-                  class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+              </div>
+
+              <div>
+                <label for="barang" class="block text-gray-700 font-medium mb-2"
+                  >Barang</label
                 >
-                  <i class="fas fa-search text-gray-400"></i>
-                </div>
-                <div
-                  id="searchLoading"
-                  class="absolute inset-y-0 right-0 pr-3 flex items-center hidden"
+                <input
+                  type="text"
+                  id="barang"
+                  name="barang"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  
+                />
+              </div>
+
+              <div>
+                <label for="tipe" class="block text-gray-700 font-medium mb-2"
+                  >Tipe</label
                 >
-                  <div class="loading"></div>
-                </div>
+                <input
+                  type="text"
+                  id="tipe"
+                  name="tipe"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  
+                />
+              </div>
+
+              <div>
+                <label for="ukuran" class="block text-gray-700 font-medium mb-2"
+                  >Ukuran</label
+                >
+                <input
+                  type="text"
+                  id="ukuran"
+                  name="ukuran"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  
+                />
+              </div>
+
+              <div>
+                <label for="warna" class="block text-gray-700 font-medium mb-2"
+                  >Warna</label
+                >
+                <input
+                  type="text"
+                  id="warna"
+                  name="warna"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  
+                />
+              </div>
+
+              <div>
+                <label for="hasil" class="block text-gray-700 font-medium mb-2"
+                  >Hasil</label
+                >
+                <input
+                  type="number"
+                  id="hasil"
+                  name="hasil"
+                  min="0"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  
+                />
               </div>
             </div>
-            <div class="flex items-end gap-2">
-              <div class="text-sm text-gray-600">
-                Menampilkan
-                <span id="dataCount" class="font-semibold">0</span> data
-              </div>
+
+            <div class="flex justify-end space-x-4 mt-8">
               <button
-                id="refreshButton"
-                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm flex items-center gap-2"
-                title="Refresh data dari spreadsheet"
+                type="reset"
+                class="bg-gray-400 text-white hover:bg-red-500 hover:shadow-xl font-semibold rounded-2xl hover:bg-white/20 transition-all duration-300 btn-mobile text-center px-8 py-4"
               >
-                <i class="fas fa-sync-alt"></i>
-                <span class="hidden sm:inline">Refresh</span>
+                Reset
+              </button>
+              <button
+                type="submit"
+                class="button-hover gradient-bg rounded-2xl"
+              >
+                Input Data
+                <i class="fas fa-paper-plane ml-2"></i>
               </button>
             </div>
-        </div>
-
-        <!-- Loading State -->
-        <div id="loadingState" class="text-center py-12">
-          <div
-            class="loading mx-auto mb-4"
-            style="width: 40px; height: 40px"
-          ></div>
-          <p class="text-gray-600">Memuat data dari spreadsheet...</p>
-        </div>
-
-        <!-- Data Content -->
-        <div id="dataContent" class="hidden">
-          <!-- Data akan diisi oleh DataFetcher -->
-        </div>
-
-        <!-- Pagination -->
-        <div
-          class="mt-6 flex justify-between items-center hidden"
-          id="paginationContainer"
-        >
-          <div class="text-sm text-gray-600">
-            Halaman <span id="currentPage">1</span> dari
-            <span id="totalPages">1</span>
-          </div>
-          <div class="flex space-x-2">
-            <button
-              id="prevBtn"
-              class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition"
-            >
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button
-              id="nextBtn"
-              class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
-            >
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Error State -->
-        <div id="errorState" class="text-center py-12 hidden">
-          <i class="fas fa-exclamation-triangle text-red-400 text-6xl mb-4"></i>
-          <h3 class="text-lg font-medium text-gray-900 mb-2">
-            Gagal memuat data
-          </h3>
-          <p class="text-gray-500 mb-4">
-            Terjadi kesalahan saat mengambil data dari spreadsheet
-          </p>
-          <button
-            id="retryButton"
-            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-          >
-            <i class="fas fa-redo mr-2"></i>Coba Lagi
-          </button>
+          </form>
         </div>
       </div>
     </section>
@@ -479,35 +378,35 @@
               <div>
                 <a
                   href="index.html"
-                  class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
                   >Beranda</a
                 >
               </div>
               <div>
                 <a
                   href="form.html"
-                  class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
                   >Form</a
                 >
               </div>
               <div>
                 <a
                   href="bank_data.html"
-                  class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2 active"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
                   >Bank Data</a
                 >
               </div>
               <div>
                 <a
                   href="index.html#galeri"
-                  class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
                   >Galeri</a
                 >
               </div>
               <div>
                 <a
                   href="index.html#kontak"
-                  class="nav-link text-slate-700 hover:text-blue-600 transition-all font-medium py-2"
+                  class="hover:text-blue-600 transition text-sm sm:text-base"
                   >Kontak</a
                 >
               </div>
@@ -562,47 +461,19 @@
     </footer>
 
     <!-- JavaScript Files -->
+    <!-- JavaScript Files - URUTAN PENTING! -->
+    <script>
+      // Define Apps Script URL globally FIRST
+      window.APP_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbweloOhvUmixkeSFW56neBmEm-X40aejJ_EBSzhjWVVPXTN2kuVjZJjdXCkqfKiAmreYQ/exec";
+      console.log("🌐 Global Apps Script URL set:", window.APP_SCRIPT_URL);
+    </script>
+
     <script src="js/config.js"></script>
     <script src="js/common.js"></script>
-    <script src="js/data-fetcher.js"></script>
     <script src="js/form-config.js"></script>
+    <script src="js/form-handler.js"></script>
 
-    <script>
-      // DataFetcher auto-initializes from js/data-fetcher.js.
-      document.addEventListener("DOMContentLoaded", function () {
-        const dataFetcher = window.dataFetcher;
-        
-        // Setup refresh button
-        const refreshButton = document.getElementById("refreshButton");
-        if (refreshButton) {
-          refreshButton.addEventListener("click", async () => {
-            const icon = refreshButton.querySelector("i");
-            icon.classList.add("fa-spin");
-            refreshButton.disabled = true;
-            
-            await dataFetcher.refreshData();
-            
-            icon.classList.remove("fa-spin");
-            refreshButton.disabled = false;
-          });
-        }
-        
-        // Store in global scope untuk testing
-        window.dataFetcher = dataFetcher;
-      });
-      
-      // Tambah CSS untuk spin animation
-      const style = document.createElement("style");
-      style.textContent = `
-        @keyframes fa-spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        .fa-spin {
-          animation: fa-spin 1s linear infinite;
-        }
-      `;
-      document.head.appendChild(style);
-    </script>
+    <!-- Debug panel removed for production -->
   </body>
 </html>
