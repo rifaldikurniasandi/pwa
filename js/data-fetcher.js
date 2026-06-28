@@ -60,7 +60,7 @@ class DataFetcher {
 
       const url = `${
         window.APP_SCRIPT_URL ||
-        "https://script.google.com/macros/s/AKfycbw7mpK9LPKIdd7VJtRTMeZma0mFclImdlAaHlVvNMp1_-i74EXfXI7K1fRlfSWfAi3ddg/exec"
+        "https://script.google.com/macros/s/AKfycbweloOhvUmixkeSFW56neBmEm-X40aejJ_EBSzhjWVVPXTN2kuVjZJjdXCkqfKiAmreYQ/exec"
       }?sheet=${encodeURIComponent(this.sheetName)}&t=${Date.now()}`;
 
       const result = window.fetchWithFallback
